@@ -1,0 +1,144 @@
+html, body, div, span, iframe,
+h1, h2, h3, h4, h5, h6, p, a, img, dl, dt, dd, ol, ul, li,
+table, tfoot, thead, tr, th, td,
+article, aside, canvas, details, footer, header, section {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+}
+
+/* HTML5 display-role reset for older browsers */
+body {
+    line-height: 1;
+    font-size: 12px;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Open Sans',arial,sans-serif;
+    /*background-color: #363636;*/
+}
+
+
+/* Bootstrap overrides*/
+.row,
+.container-fluid {
+    padding: 0;
+    margin: 0;
+}
+
+.column{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.section-header{
+    font-size: 11px;
+    color: #35373d;
+    text-transform: uppercase;
+    padding-bottom: 0.091em;
+    padding: 5px 0;
+}
+
+
+
+ul#strengthBar {
+    display:inline;
+    list-style:none;
+    margin:0;
+    margin-left:15px;
+    padding:0;
+    vertical-align:2px;
+}
+
+.point:last {
+    margin:0 !important;
+}
+.point {
+    background:#DDD;
+    border-radius:2px;
+    display:inline-block;
+    height:5px;
+    margin-right:1px;
+    width:20px;
+}
+
+/* Styles by TJ */
+#gridParent{ padding: 0 !important;}
+.sub-bar{ float: left; width: 100%; border: 1px solid #606572; padding: 4px; margin: -1px 0 12px;}
+.sub-bar i{ font-size: 1.5em;}
+.chart-wrapper{ border: 1px solid #bbb; border-radius: 2px;}
+.severity-pie-legend{ width: 100%;}
+.severity-pie-legend .legend-title{ font: bold 13px Arial; padding: 12px 0 8px;}
+.severity-pie-legend .ng-scope{ width: 50%; box-sizing: border-box; display: inline-block; padding: 3px 0;}
+
+/* pdf export customization */
+.k-pdf-export .k-grid-toolbar,
+.k-pdf-export .k-i-arrow-s,
+.k-pdf-export .k-pager-wrap {
+    display: none;
+ }
+
+.k-pdf-export .k-grid {
+    font-size: 9.5px;
+}
+.k-pdf-export .k-grid td {
+    line-height: 1.5em;
+}
+
+
+*.icon-white {color: white}
+*.icon-red {color: red}
+
+.table-overlay{ height: 100% !important; background: rgba(155, 155, 155, 0.15) !important;}
+.table-overlay span{ background: black none repeat scroll 0 0 !important; border: 0 none !important; border-radius: 2px !important; font-size: 13px !important; left: 50% !important; padding: 8px 15px !important; position: absolute !important; top: 250px; !important; transform: translate(-50%, -50%) !important; color: #fff;}
+.table-overlay span:after{ float: left; margin: 0 5px 0 -4px; content: "\f071"; font: normal 14px "FontAwesome"; color: #fff;}
+
+/*.k-grid-content tbody tr:hover {*/
+/*    background-color: #2eb3a6;*/
+/*    border-color: #2eb3a6;*/
+/*    color: white;*/
+/*    cursor: pointer;*/
+/*}*/
+
+.offline-ui {
+    left: 90%;
+    top: 1px;
+}
+
+.k-edit-buttons {
+    background: white;
+}
+
+#navbar-main {
+    /*background-color: #363940;*/
+    /*background-color: #363636;*/
+}
+
+#drawer-content li:last-child {
+    border: 0;
+}
+
+/*.hidden {*/
+/*    display: none;*/
+/*}*/
+
+.k-grid {
+    font-size: 12px;
+}
+
+.k-grid td {
+    line-height: 1.6em;
+}
+
+.sub-nav { /*min-width: 80px;*/}
+
+.k-drawer-item {
+    font-size: 14px;
+}

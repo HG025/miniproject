@@ -1,0 +1,22 @@
+{
+  "name": "miniproject",
+  "description": "my project using Kendo UI",
+  "main": "index.html",
+  "authors": [
+    "huzaifaghangorcloud"
+  ],
+  "license": "MIT",
+  "homepage": "auth/login",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^5.3.5",
+    "kendo-ui": "^2025.1.227",
+    "jquery": "^3.7.1"
+  }
+}

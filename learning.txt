@@ -11,3 +11,11 @@ ng add @progress/kendo-angular-dropdowns
 
 
 npm install --save @progress/kendo-theme-bootstrap
+
+
+
+// bower
+
+npm install -g bower
+bower init
+bower install jquery bootstrap --save
