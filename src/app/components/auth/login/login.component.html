@@ -4,7 +4,52 @@
 
 
 <div class="container transparent" style="position: relative; margin-top: 12%;">
-    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="col-md-5 col-md-offset-4 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                {{'Company_Name' | translate}}
+            </div>
+            <div class="panel-body">
+                <div class="logoImage">
+                    <img class="logo-img" src="assets/images/18.jpg" alt="logo-img">
+                </div>
+                <br><br>
+                <form [formGroup]="form">
+                    <div class="input-group" style="margin-bottom: 25px;">
+                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                        <input id="username" type="text" class="form-control" value=""
+                               placeholder="{{'username_placeholder' | translate}}"
+                               ng-model="username">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 25px;">
+                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-lock" style="color: #337ab7"></i></span>
+                        <input id='password' type="text" class="form-control" value=""
+                                placeholder="{{'password_placeholder' | translate}}"
+                                ng-model="password">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="forgot-password" [routerLink]="['/auth/forgot-password']" translate="{{'forgot_password' | translate}}?" style="color: #337ab7; cursor: pointer;"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="pull-right">
+                            <button type="submit" class="k-button k-primary btn-border " translate="{{'login'| translate}}">                    
+                            </button>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="panel-footer">
+                <em>Hello</em>
+            </div>
+        </div>
+        <!-- <div class="panelbar-wrapper">
+            <kendo-panelbar>
+
+            </kendo-panelbar>    
+        </div>
         <div class="panel panel-primary"> 
         <div class="panel-heading">
             <h1>hjkas</h1>
@@ -13,100 +58,6 @@
             <h2>hsjkdhkds</h2>
         </div>
         <h1>hello</h1>
-    </div>
+    </div> -->
     </div>
 </div>
-
-
-
-
-
-<!-- <style>
-
-    .panel-footer {
-        background-color: white;
-    }
-
-    .huge {
-        font-size: 30px;
-    }
-
-    .transparent {
-        zoom: 1;
-        filter: alpha(opacity=50);
-        opacity: 0.9;
-    }
-
-    .logo-img {
-        width: 150px;
-        height: 60px;
-        margin: 0 auto 0px;
-        display: block;
-    }
-
-    input[type="checkbox"] {
-        margin: 0px;
-    }
-
-</style> -->
-
-<!-- <div class="container transparent" style="position: relative; margin-top: 12%;" ng-hide="isAuthenticated()" >
-
-    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-            </div>
-
-            <div class="panel-body">
-                <div ng-show="buildProfile == 'nx'">
-                    <img class="logo-img" src="assets/images/nx/logo.jpg" alt="logo"/>
-                </div>
-                <div ng-hide="buildProfile == 'nx'">
-                    <img class="logo-img" src="assets/images/logo.jpg" alt="logo"/>
-                </div>
-                <div class="alert alert-danger alert-dismissible" role="alert" ng-show="authenticationError"
-                     >
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>Authentication failed!</strong> Please check your credentials and try again.
-                </div>
-                <br/><br/>
-                <form >
-
-                    <div class="input-group" style="margin-bottom: 25px;">
-                        <span class="input-group-addon"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                        <input id="username" type="text" class="form-control" value=""
-                               placeholder="{{'global.form.username.placeholder' }}"
-                               ng-model="username">
-                    </div>
-
-                    <div class="input-group" style="margin-bottom: 25px;">
-                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" style="color: #337ab7"></i></span>
-                        <input id="password" type="password" class="form-control"
-                               placeholder="{{'login.form.password.placeholder' }}"
-                               ng-model="password">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="checkbox" id="rememberMe" ng-model="rememberMe" class="k-checkbox">
-                        <label class="k-checkbox-label" for="rememberMe" translate="login.form.rememberme">Remember Me</label>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="pull-right">
-                            <button type="button" ui-sref="requestReset" class="k-button btn-border"
-                                    translate="login.password.forgot">FORGOT PASSWORD
-                            </button>
-                            <button ng-disabled="progress" type="submit" class="k-button k-primary btn-border" translate="login.form.button">
-                                <span ng-hide="progress">LOGIN</span>
-                                <span ng-show="progress">Please wait...</span>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="panel-footer">
-                <em>Powered by GhangorCloud</em>
-            </div>
-        </div>
-    </div>
-</div> -->
