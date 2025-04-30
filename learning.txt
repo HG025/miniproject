@@ -1,0 +1,13 @@
+npm install @angular/cli
+npm install @ng-bootstrap/ng-bootstrap
+npm install @ngx-translate/core @ngx-translate/http-loader
+npm install @angular/animations
+
+// for Kendo UI
+
+ng add @progress/kendo-angular-dateinputs
+ng add @progress/kendo-angular-grid
+ng add @progress/kendo-angular-dropdowns
+
+
+npm install --save @progress/kendo-theme-bootstrap
