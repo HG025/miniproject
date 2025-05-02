@@ -4,5 +4,7 @@
     "password_placeholder": "Your password",
     "remeber_me": "Remember Me",
     "forgot_passowrd": "Forgot Password",
-    "login": "Login"
+    "login": "Login",
+    "reset_password": "Reset Password",
+    "email_placeholder": "Your e-mail"
 }

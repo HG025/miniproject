@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { LayoutModule } from "@progress/kendo-angular-layout";
 import { TranslateModule } from '@ngx-translate/core';
@@ -14,7 +14,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent{
   public form!: FormGroup;
 
   constructor(
@@ -25,6 +25,7 @@ export class LoginComponent {
       email: new FormControl('',[Validators.required, Validators.email])
     })
   }
+
 
 
 
