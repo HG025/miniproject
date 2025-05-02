@@ -4,5 +4,10 @@ export const content : Routes = [
     {
         path: '',
         loadChildren: () => import('../../components/dashboard/dashboard.routes').then(r => r.dashboardRoutes)
+    },
+    {
+        path: '',
+        loadChildren: () => import('../../components/appbar/appbar.routes').then(r => r.appbarRoutes)
     }
+
 ]

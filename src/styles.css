@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+.form-control {
+    font-size: 14px;
+}
+
+.form-group {
+    font-size: 14px; 
+}
+
+.button {
+    background-color: #428bca;
+    border-color: #357ebd;
+    color: white;
+    border-radius: 4px;
+    font-size: 18px;
+}
