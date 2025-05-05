@@ -1,42 +1,25 @@
 <p>appbar works!</p>
 
+<div class="custom-toolbar">
+  <button
+  kendoButton
+  [svgIcon]="menuSvg"
+  fillMode="flat"
+  (click)="drawer.toggle()"
+  ></button>
+  <span class="">Hello World</span>
+</div>
 
-<div class="appbar-container">
-    <kendo-appbar position="top">
-      <kendo-appbar-section>
-        <button kendoButton fillMode="flat">
-          <kendo-svgicon [icon]="menuIcon"></kendo-svgicon>
-        </button>
-      </kendo-appbar-section>
+<kendo-drawer-container>
+  <kendo-drawer
+  #drawer
+  [items]="items"
+  mode="push"
+  [mini]="true"
+  [expanded]="true"
+  (select)="onSelect($event)"></kendo-drawer>
 
-      <kendo-appbar-section>
-        <h1 class="title">Kendo UI for Angular</h1>
-      </kendo-appbar-section>
-
-      <kendo-appbar-spacer width="32px"></kendo-appbar-spacer>
-
-      <kendo-appbar-section>
-        <ul>
-          <li><span>What's New</span></li>
-          <li><span>About</span></li>
-          <li><span>Contacts</span></li>
-        </ul>
-      </kendo-appbar-section>
-
-      <kendo-appbar-spacer></kendo-appbar-spacer>
-
-      <kendo-appbar-section class="actions">
-     
-        <span class="k-appbar-separator"></span>
-      </kendo-appbar-section>
-
-      <kendo-appbar-section>
-        <kendo-avatar
-          [imageSrc]="kendokaAvatar"
-          shape="circle"
-          width="26px"
-          height="26px"
-        ></kendo-avatar>
-      </kendo-appbar-section>
-    </kendo-appbar>
-  </div>
+  <kendo-drawer-content>
+    <app-content [selectedItem]="selected"></app-content>
+  </kendo-drawer-content>
+</kendo-drawer-container>

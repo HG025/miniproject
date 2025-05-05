@@ -1,0 +1,30 @@
+<!-- <p>content works!</p> -->
+
+
+<div id="register" *ngIf="selectedItem === 'register'">
+    <ul class="inboxList">
+      <li>
+        <h6>Monday meeting</h6>
+        <p>
+          Hi Tom, Since Monday I'll be out of office, I'm rescheduling the
+          meeting for Tuesday.
+        </p>
+      </li>
+      <li>
+        <h6>I'm sorry, Tom</h6>
+        <p>
+          Hi Tom, my aunt comes for a visit this Saturday, so I can't come
+          back to St. Pete...
+        </p>
+      </li>
+    </ul>
+  </div>
+  <div id="login" *ngIf="selectedItem === 'login'">
+    <ul>
+      <li>Monday meeting</li>
+      <li>Regarding org chart changes</li>
+      <li>Meeting with Cliff</li>
+      <li>Global Marketing Meeting</li>
+      <li>Out tonight with collegues?</li>
+    </ul>
+  </div>

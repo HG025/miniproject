@@ -4,10 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { IconsModule, SVGIcon } from '@progress/kendo-angular-icons';
-import { LayoutModule } from '@progress/kendo-angular-layout';
+import { DrawerItem, DrawerSelectEvent, LayoutModule } from '@progress/kendo-angular-layout';
 import { NavigationModule } from '@progress/kendo-angular-navigation';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { bellIcon, menuIcon } from '@progress/kendo-svg-icons';
+import { bellIcon, envelopeLinkIcon, homeIcon, menuIcon } from '@progress/kendo-svg-icons';
+import { ContentComponent } from "../content/content.component";
 
 
 @Component({
@@ -16,17 +16,29 @@ import { bellIcon, menuIcon } from '@progress/kendo-svg-icons';
     RouterModule,
     CommonModule,
     LayoutModule,
-    
     IconsModule,
     NavigationModule,
-    ButtonsModule,],
+    ButtonsModule,
+    ContentComponent
+],
   templateUrl: './appbar.component.html',
   styleUrl: './appbar.component.css'
 })
 export class AppbarComponent {
 
-  public menuIcon: SVGIcon = menuIcon;
-  public bellIcon: SVGIcon = bellIcon;
-  public kendokaAvatar = 'https://demos.telerik.com/kendo-angular-ui/assets/navigation/appbar/kendoka-angular.png';
+  public menuSvg: SVGIcon = menuIcon;
+  public selected = 'register';
+  
+  public items: Array<DrawerItem> = [
+    {text: 'register', svgIcon: homeIcon, selected: true},
+    {separator: true},
+    {text: 'login', svgIcon: envelopeLinkIcon},
+    {separator: true}
+  ];
+
+public onSelect(ev: DrawerSelectEvent): void {
+  this.selected = ev.item.text;
+  }
+
 
 }

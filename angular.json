@@ -23,7 +23,12 @@
             "tsConfig": "tsconfig.app.json",
            "assets": [
                "src/assets",
-               "src/favicon.ico"
+               "src/favicon.ico",
+               {
+                "glob": "**/*",
+                "input": "node_modules/@progress/kendo-theme-default/dist/fonts/",
+                "output": "/assets/images/"
+              }
             ],
             "styles": [
               {
@@ -95,7 +100,12 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": [
                "src/assets",
-               "src/favicon.ico"
+               "src/favicon.ico",
+               {
+                "glob": "**/*",
+                "input": "node_modules/@progress/kendo-theme-default/dist/fonts/",
+                "output": "/assets/images/"
+              }
             ],
             "styles": [
               {
