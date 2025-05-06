@@ -7,11 +7,11 @@ export const content : Routes = [
     },
     {
         path: '',
-        loadChildren: () => import('../../components/appbar/appbar.routes').then(r => r.appbarRoutes)
-    },
-    {
-        path: '',
         loadChildren: () => import('../../components/employee/employee.routes').then(r => r.employeeRoutes)
-    }
+    },
+    // {
+    //     path: '',
+    //     loadChildren: () => import('../../components/roles/roles.routes').then(r => r.rolesRoutes)
+    // }
 
 ]

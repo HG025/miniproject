@@ -1,40 +1,47 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { LayoutModule } from '@progress/kendo-angular-layout';
+import { DrawerItem, DrawerSelectEvent, LayoutModule } from '@progress/kendo-angular-layout';
 import { KENDO_GRID } from '@progress/kendo-angular-grid';
 import { APIResponseModel, iAllRoles } from '../../model/interface/role';
 import { RolesService } from '../../services/roles.service';
 import { CommonModule, NgFor } from '@angular/common';
 import { KENDO_INPUTS } from '@progress/kendo-angular-inputs';
-import { AppbarComponent } from "../appbar/appbar.component";
+import { RouterModule } from '@angular/router';
+import { IconsModule, SVGIcon } from '@progress/kendo-angular-icons';
+import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { ContentComponent } from '../content/content.component';
+import { NavigationModule } from '@progress/kendo-angular-navigation';
+import { envelopeLinkIcon, homeIcon, menuIcon, userIcon } from '@progress/kendo-svg-icons';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, LayoutModule, KENDO_GRID, KENDO_INPUTS, AppbarComponent],
+  imports: [
+    RouterModule,
+    CommonModule,
+    LayoutModule,
+    IconsModule,
+    NavigationModule,
+    ButtonsModule,
+    ContentComponent
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent{
+  public menuSvg: SVGIcon = menuIcon;
+  public selected = 'dashboard';
   
-  rolesList: iAllRoles[] =[];
+  public items: Array<DrawerItem> = [
+    {text: 'dashboard', svgIcon: homeIcon, selected: true},
+    {separator: true},
+    {text: 'employee', svgIcon: userIcon},
+    {separator: true},
+    {text: 'roles', svgIcon: envelopeLinkIcon, selected: true},
+    {separator: true},
+  ];
 
-  rolesService = inject(RolesService);
-  gridView!: any[];
-
-
-
-  ngOnInit(): void {
-    this.rolesService.getAllRole().subscribe((res: APIResponseModel)=>{
-      this.rolesList = res.data;
-      this.gridView = this.rolesList;
-      console.log(this.rolesList,"rolesList")
-      console.log(this.gridView,"gridView")
-    })
+public onSelect(ev: DrawerSelectEvent): void {
+  this.selected = ev.item.text;
   }
-
-
-
-
-
 }
 
 

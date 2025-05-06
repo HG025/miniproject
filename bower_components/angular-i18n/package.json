@@ -26,8 +26,13 @@
   "jspm": {
     "shim": {
       "angular-i18n": {
-        "deps": ["angular"]
+        "deps": [
+          "angular"
+        ]
       }
     }
+  },
+  "dependencies": {
+    "angular-i18n": "file:"
   }
 }

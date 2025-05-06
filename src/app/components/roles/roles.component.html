@@ -1,1 +1,17 @@
-<p>roles works!</p>
+
+
+
+<kendo-grid 
+[kendoGridBinding]="gridView"
+kendoGridSelectBy="id"
+[columnMenu]="{filter: true}"
+>
+
+<kendo-grid-column-group title="Employee Role" 
+[columnMenu]="false">
+<kendo-grid-column title="RoleId" field="roleId">
+</kendo-grid-column>
+<kendo-grid-column title="Role" field="role"></kendo-grid-column>
+</kendo-grid-column-group>
+</kendo-grid>
+
