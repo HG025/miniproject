@@ -1,5 +1,3 @@
-<p>appbar works!</p>
-
 <div class="custom-toolbar">
   <button
   kendoButton
@@ -10,16 +8,20 @@
   <span class="">Hello World</span>
 </div>
 
-<kendo-drawer-container>
+
+<kendo-drawer-container style="height: 90vh;">
   <kendo-drawer
   #drawer
   [items]="items"
   mode="push"
   [mini]="true"
   [expanded]="true"
-  (select)="onSelect($event)"></kendo-drawer>
+  (select)="onSelect($event)"
+  ></kendo-drawer>
 
-  <kendo-drawer-content>
+  <!-- <kendo-drawer-content>
     <app-content [selectedItem]="selected"></app-content>
-  </kendo-drawer-content>
+  </kendo-drawer-content> -->
 </kendo-drawer-container>
+
+

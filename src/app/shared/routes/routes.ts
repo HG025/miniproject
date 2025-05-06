@@ -8,6 +8,10 @@ export const content : Routes = [
     {
         path: '',
         loadChildren: () => import('../../components/appbar/appbar.routes').then(r => r.appbarRoutes)
+    },
+    {
+        path: '',
+        loadChildren: () => import('../../components/employee/employee.routes').then(r => r.employeeRoutes)
     }
 
 ]

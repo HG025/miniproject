@@ -19,7 +19,6 @@ import { ContentComponent } from "../content/content.component";
     IconsModule,
     NavigationModule,
     ButtonsModule,
-    ContentComponent
 ],
   templateUrl: './appbar.component.html',
   styleUrl: './appbar.component.css'
@@ -27,13 +26,13 @@ import { ContentComponent } from "../content/content.component";
 export class AppbarComponent {
 
   public menuSvg: SVGIcon = menuIcon;
-  public selected = 'register';
+  public selected = 'employee';
   
   public items: Array<DrawerItem> = [
-    {text: 'register', svgIcon: homeIcon, selected: true},
+    {text: 'employee', svgIcon: homeIcon, selected: true},
     {separator: true},
     {text: 'login', svgIcon: envelopeLinkIcon},
-    {separator: true}
+    {separator: true},
   ];
 
 public onSelect(ev: DrawerSelectEvent): void {

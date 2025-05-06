@@ -5,10 +5,11 @@ import { APIResponseModel, iAllRoles } from '../../model/interface/role';
 import { RolesService } from '../../services/roles.service';
 import { CommonModule, NgFor } from '@angular/common';
 import { KENDO_INPUTS } from '@progress/kendo-angular-inputs';
+import { AppbarComponent } from "../appbar/appbar.component";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule,LayoutModule, KENDO_GRID, KENDO_INPUTS],
+  imports: [CommonModule, LayoutModule, KENDO_GRID, KENDO_INPUTS, AppbarComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
