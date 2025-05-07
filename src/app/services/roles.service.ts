@@ -14,5 +14,9 @@ export class RolesService {
     return this.http.get<APIResponseModel>('/api/api/ClientStrive/GetAllRoles');
   }
 
+  getDashboardData(): Observable<APIResponseModel> {
+    return this.http.get<APIResponseModel>('/api/api/ClientStrive/GetDasboardData')
+  }
+
 
 }

@@ -10,7 +10,8 @@ import { IconsModule, SVGIcon } from '@progress/kendo-angular-icons';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { ContentComponent } from '../content/content.component';
 import { NavigationModule } from '@progress/kendo-angular-navigation';
-import { envelopeLinkIcon, homeIcon, menuIcon, userIcon } from '@progress/kendo-svg-icons';
+import { envelopeLinkIcon, homeIcon, menuIcon, searchIcon, userIcon } from '@progress/kendo-svg-icons';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,13 +22,15 @@ import { envelopeLinkIcon, homeIcon, menuIcon, userIcon } from '@progress/kendo-
     IconsModule,
     NavigationModule,
     ButtonsModule,
-    ContentComponent
+    ContentComponent,
+    TranslateModule
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent{
   public menuSvg: SVGIcon = menuIcon;
+  public searchSvg: SVGIcon = searchIcon;
   public selected = 'dashboard';
   
   public items: Array<DrawerItem> = [

@@ -6,5 +6,6 @@
     "forgot_password": "Forgot Password",
     "login": "Login",
     "reset_password": "Reset Password",
-    "email_placeholder": "Your e-mail"
+    "email_placeholder": "Your e-mail",
+    "search_placeholder": "Search"
 }

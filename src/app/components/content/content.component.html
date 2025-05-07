@@ -1,14 +1,45 @@
-
 <div id="dashboard" *ngIf="selectedItem === 'dashboard'">
-    
-   </div>
+    <div class="col-md-12" style="height: 100%; padding: 0%;">
+        <div class="col-md-6" style="border-radius: 10px;">
+            <kendo-chart>
+                <ng-template
+                kendoChartDonutCenterTemplate>
+                <h5>Employee Data</h5>
+                </ng-template>
+                <kendo-chart-title
+                text="{{'Employee Data Chart'}}"
+                ></kendo-chart-title>
+                <kendo-chart-tooltip>
+                    <ng-template
+                    kendoChartSeriesTooltipTemplate
+                    let-value="value"
+                    let-category="category"
+                    >
+                {{category}}: {{value}}
+                </ng-template>
+                </kendo-chart-tooltip>
+                <kendo-chart-series>
+                    <kendo-chart-series-item type="donut" [data]="chartData" field="value" categoryField="category">
+                        <kendo-chart-series-item-labels [content]="labelContent" color="#fff" background="none" [visible]="true"></kendo-chart-series-item-labels>
+                    </kendo-chart-series-item>
+                    
+                </kendo-chart-series>
+                <kendo-chart-legend [visible]="false"></kendo-chart-legend>
+            </kendo-chart>
+        </div>
 
 
-  <div id="employee" *ngIf="selectedItem === 'employee'">
-   <app-employee></app-employee>    
-  </div>
+        <div class="col-md-6">
+            <h1>Test2</h1>
+        </div>
+    </div>
+</div>
 
-  <div id="roles" *ngIf="selectedItem === 'roles'">
-   <app-roles></app-roles>
-  </div>
 
+<div id="employee" *ngIf="selectedItem === 'employee'">
+    <app-employee></app-employee>
+</div>
+
+<div id="roles" *ngIf="selectedItem === 'roles'">
+    <app-roles></app-roles>
+</div>

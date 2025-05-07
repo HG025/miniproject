@@ -1,11 +1,24 @@
 <div class="custom-toolbar">
-    <button
-    kendoButton
-    [svgIcon]="menuSvg"
-    fillMode="flat"
-    (click)="drawer.toggle()"
-    ></button>
-    <span class="">Hello World</span>
+    <div class="menuButton">
+        <button
+        kendoButton
+        [svgIcon]="menuSvg"
+        fillMode="flat"
+        (click)="drawer.toggle()"
+        ></button>
+        <span class="">Hello World</span>
+    </div>
+
+    <div class="search" style="margin-right: 1vh;">
+        <input type="text"
+        placeholder="{{'search_placeholder' | translate}}"
+        style="border-radius: 10px; ">
+        <button
+        kendoButton
+        [svgIcon]="searchSvg"
+        fillMode="flat"
+        ></button>
+    </div>
   </div>
   
   

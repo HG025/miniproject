@@ -9,6 +9,8 @@ npm install @progress/kendo-theme-default
 ng add @progress/kendo-angular-dateinputs
 ng add @progress/kendo-angular-grid
 ng add @progress/kendo-angular-dropdowns
+ ng add @progress/kendo-angular-charts
+ ng add @progress/kendo-angular-menu  
 
 
 npm install --save @progress/kendo-theme-bootstrap

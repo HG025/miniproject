@@ -1,3 +1,27 @@
-<div class="container">
-    <h1>Employee works</h1>
-</div>
+
+    <div class="col-md-12" #employeegrid >
+        <kendo-grid [data]="employeeList"
+        [kendoGridBinding]="employeeList"
+        [pageable]="true"
+        [pageSize]="5"
+        style="height: 90vh;"
+        [sortable]="true"
+        >
+        <ng-template kendoGridToolbarTemplate>
+            <button type="button" kendoGridExcelCommand [svgIcon]="excelSvg"> Export to Excel</button>
+        </ng-template>
+        <kendo-grid-excel fileName="employee.xlsx"></kendo-grid-excel>
+        </kendo-grid>
+
+        <kendo-contextmenu
+        [target]="employeegrid"
+        >
+        <kendo-menu-item text="Add Employee"></kendo-menu-item>
+        <kendo-menu-item text="Edit Employee"></kendo-menu-item>
+        <kendo-menu-item text="Delete Employee"></kendo-menu-item>
+    </kendo-contextmenu>
+
+        
+
+
+    </div>

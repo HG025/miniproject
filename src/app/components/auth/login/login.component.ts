@@ -35,6 +35,7 @@ export class LoginComponent {
 
   onLoginClick() {
     this.form.markAllAsTouched();
+    this.route.navigate(['/dashboard']);
 
     if(this.form.invalid) {
       console.log("this is invalid Error")

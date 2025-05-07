@@ -10,3 +10,9 @@ export interface iAllRoles {
     roleId: string,
     role: string
 }
+
+export interface IDashboardData {
+    totalClient: string,
+    totalEmployee: string,
+    totalDesignation: string
+}
