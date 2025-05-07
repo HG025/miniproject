@@ -12,3 +12,11 @@
    <app-roles></app-roles>
   </div>
 
+  <div id="meeting" *ngIf="selectedItem === 'meeting'">
+   <app-meeting></app-meeting>
+  </div>
+
+  <div id="project" *ngIf="selectedItem === 'project'">
+   <app-project></app-project>
+  </div>
+
