@@ -3,6 +3,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { DashboardComponent } from "../dashboard/dashboard.component";
 import { EmployeeComponent } from "../employee/employee.component";
 import { RolesComponent } from "../roles/roles.component";
+<<<<<<< HEAD
 import { ChartsModule, SeriesLabelsContentArgs } from "@progress/kendo-angular-charts";
 import { APIResponseModel, IDashboardData } from '../../model/interface/role';
 import { RolesService } from '../../services/roles.service';
@@ -10,6 +11,14 @@ import { RolesService } from '../../services/roles.service';
 @Component({
   selector: 'app-content',
   imports: [CommonModule, EmployeeComponent, RolesComponent, ChartsModule],
+=======
+import { ProjectComponent } from "../project/project.component";
+import { MeetingComponent } from "../meeting/meeting.component";
+
+@Component({
+  selector: 'app-content',
+  imports: [CommonModule, EmployeeComponent, RolesComponent, ProjectComponent, MeetingComponent],
+>>>>>>> 9f3ae259eae71456045ed11a3db1e68dac8bc4ab
   templateUrl: './content.component.html',
   styleUrl: './content.component.css'
 })
