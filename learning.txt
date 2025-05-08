@@ -11,6 +11,7 @@ ng add @progress/kendo-angular-grid
 ng add @progress/kendo-angular-dropdowns
  ng add @progress/kendo-angular-charts
  ng add @progress/kendo-angular-menu  
+ ng add @progress/kendo-angular-dropdowns
 
 
 npm install --save @progress/kendo-theme-bootstrap

@@ -7,3 +7,20 @@ html, body {
 .col-md-12 {
     padding: 0px;
 }
+
+.col-md-6 {
+  margin-left: -15px;
+}
+
+.container {
+  width: 70vh;
+  margin-left: -13px
+}
+
+.container1 {
+  width: 65vh;
+}
+
+.container2 {
+  width: 60vh;
+}

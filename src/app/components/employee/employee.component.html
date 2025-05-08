@@ -8,7 +8,7 @@
         [sortable]="true"
         >
         <ng-template kendoGridToolbarTemplate>
-            <button type="button" kendoGridExcelCommand [svgIcon]="excelSvg"> Export to Excel</button>
+            <button class="btn btn-success" type="button" kendoGridExcelCommand [svgIcon]="excelSvg"> Export to Excel</button>
         </ng-template>
         <kendo-grid-excel fileName="employee.xlsx"></kendo-grid-excel>
         </kendo-grid>
@@ -21,7 +21,270 @@
         <kendo-menu-item text="Delete Employee"></kendo-menu-item>
     </kendo-contextmenu>
 
-        
+    <kendo-dialog 
+    width="500px"
+    >
+        <kendo-dialog-titlebar>
+            Add Employee
+        </kendo-dialog-titlebar>
 
+        <form >
+            <div style="display: flex;">
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="roleId" type="number" class="form-control" value=""
+                           placeholder="{{'roleId_placeholder' | translate}}"
+                           ng-model="roleId">
+                </div>
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="empDesignationId" type="number" class="form-control" value=""
+                           placeholder="{{'empDesignationId_placeholder' | translate}}"
+                           ng-model="empDesignationId">
+                </div>
+            </div>
+            <div style="display: flex;">
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="username" type="text" class="form-control" value=""
+                           placeholder="{{'username_placeholder' | translate}}"
+                           ng-model="username">
+                </div>
+            </div>
+            <div style="display: flex;">
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="empName" type="text" class="form-control" value=""
+                           placeholder="{{'empName_placeholder' | translate}}"
+                           ng-model="empName">
+                </div>
+            </div>
+
+            <div style="display: flex;">
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="empCode" type="number" class="form-control" value=""
+                           placeholder="{{'empCode_placeholder' | translate}}"
+                           ng-model="empCode">
+                </div>
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="empId" type="number" class="form-control" value=""
+                           placeholder="{{'empId_placeholder' | translate}}"
+                           ng-model="empId">
+                </div>
+            </div>
+
+            <div style="display: flex;">
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="empEmailId" type="text" class="form-control" value=""
+                           placeholder="{{'empEmailId_placeholder' | translate}}"
+                           ng-model="empEmailId">
+                </div>
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="empPersonalEmailId" type="text" class="form-control" value=""
+                           placeholder="{{'empPersonalEmailId_placeholder' | translate}}"
+                           ng-model="empPersonalEmailId">
+                </div>
+            </div>
+
+            <div style="display: flex;">
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="empContactNo" type="number" class="form-control" value=""
+                           placeholder="{{'empContactNo_placeholder' | translate}}"
+                           ng-model="empContactNo">
+                </div>
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="empAltContactNo" type="number" class="form-control" value=""
+                           placeholder="{{'empAltContactNo_placeholder' | translate}}"
+                           ng-model="empAltContactNo">
+                </div>
+            </div>
+
+            <div style="display: flex;">
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="empExpTotalYear" type="number" class="form-control" value=""
+                           placeholder="{{'empExpTotalYear_placeholder' | translate}}"
+                           ng-model="empExpTotalYear">
+                </div>
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="empExpTotalMonth" type="number" class="form-control" value=""
+                           placeholder="{{'empExpTotalMonth_placeholder' | translate}}"
+                           ng-model="empExpTotalMonth">
+                </div>
+            </div>
+
+            <div style="display: flex;">
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="empCity" type="text" class="form-control" value=""
+                           placeholder="{{'empCity_placeholder' | translate}}"
+                           ng-model="empCity">
+                </div>
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="empState" type="text" class="form-control" value=""
+                           placeholder="{{'empState_placeholder' | translate}}"
+                           ng-model="empState">
+                </div>
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="empPinCode" type="number" class="form-control" value=""
+                           placeholder="{{'empPinCode_placeholder' | translate}}"
+                           ng-model="empPinCode">
+                </div>
+            </div>
+
+            <div style="display: flex;">
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="empAddress" type="text" class="form-control" value=""
+                           placeholder="{{'empAddress_placeholder' | translate}}"
+                           ng-model="empAddress">
+                </div>
+            </div>
+
+            <div style="display: flex;">
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="password" type="text" class="form-control" value=""
+                           placeholder="{{'password_placeholder' | translate}}"
+                           ng-model="password">
+                </div>
+            </div>
+
+            <div class="section">
+                <h4>Skills</h4>
+                <div id="skills-container">
+                    <div class="repeatable">
+
+                    </div>
+                </div>
+            </div>
+
+            <kendo-dropdownlist 
+            #skills
+            [data]="dropdownOptions"
+            [(ngModel)]="selectedOption"
+            textField="text"
+            valueField="value"
+            [valuePrimitive]="true"
+            (valueChange)="onSelectedValueChange($event)"
+            name="employeeSelection"
+            ></kendo-dropdownlist>
+
+            <p>Selected Option: {{ selectedOption }}</p>
+
+
+            <div *ngIf="selectedOption === 'skills'">
+                <div style="display: flex;">
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                        <input id="empSkillId" type="text" class="form-control" value=""
+                               placeholder="{{'empSkillId_placeholder' | translate}}"
+                               ng-model="empSkillId">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                        <input id="empId" type="text" class="form-control" value=""
+                               placeholder="{{'empId_placeholder' | translate}}"
+                               ng-model="empId">
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                        <input id="skill" type="text" class="form-control" value=""
+                               placeholder="{{'skill_placeholder' | translate}}"
+                               ng-model="skill">
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                        <input id="totalYearExp" type="text" class="form-control" value=""
+                               placeholder="{{'totalYearExp_placeholder' | translate}}"
+                               ng-model="totalYearExp">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                        <input id="lastVersionUsed" type="text" class="form-control" value=""
+                               placeholder="{{'lastVersionUsed_placeholder' | translate}}"
+                               ng-model="lastVersionUsed">
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div  *ngIf="selectedOption === 'experience'">
+                <div style="display: flex;">
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                        <input id="empExpId" type="text" class="form-control" value=""
+                               placeholder="{{'empExpId_placeholder' | translate}}"
+                               ng-model="empExpId">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                        <input id="empId" type="text" class="form-control" value=""
+                               placeholder="{{'empId_placeholder' | translate}}"
+                               ng-model="empId">
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                        <input id="companyName" type="text" class="form-control" value=""
+                               placeholder="{{'companyName_placeholder' | translate}}"
+                               ng-model="companyName">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                        <input id="designation" type="text" class="form-control" value=""
+                               placeholder="{{'designation_placeholder' | translate}}"
+                               ng-model="designation">
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                        <input id="projectsWorkedOn" type="text" class="form-control" value=""
+                               placeholder="{{'projectsWorkedOn_placeholder' | translate}}"
+                               ng-model="projectsWorkedOn">
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                        <input id="startDate" type="text" class="form-control" value=""
+                               placeholder="{{'startDate_placeholder' | translate}}"
+                               ng-model="startDate">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                        <input id="endDate" type="text" class="form-control" value=""
+                               placeholder="{{'endDate_placeholder' | translate}}"
+                               ng-model="endDate">
+                    </div>
+                </div>
+            </div>
+
+
+            
+
+           
+          
+        </form>
+
+    
+    </kendo-dialog>
 
     </div>
+

@@ -1,1 +1,18 @@
-<p>meeting works!</p>
+
+
+<div class="col-md-12">
+    <kendo-grid [data]="meetingList">
+        <ng-template kendoGridToolbarTemplate>
+
+            <div style="width: 90%;">
+                <button class="btn btn-success">Export to Excel</button>
+            </div>
+                <div>
+                    <button class="btn btn-primary">Add Meeting</button>
+                </div>
+           
+        </ng-template>
+
+    </kendo-grid>
+
+</div>
