@@ -22,6 +22,7 @@ export class RolesComponent implements OnInit{
 
 
   ngOnInit(): void {
+    console.log("Roles Page")
     this.rolesService.getAllRole().subscribe((res: APIResponseModel)=>{
       this.rolesList = res.data;
       this.gridView = this.rolesList;
