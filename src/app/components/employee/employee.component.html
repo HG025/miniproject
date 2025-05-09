@@ -13,17 +13,17 @@
         <kendo-grid-excel fileName="employee.xlsx"></kendo-grid-excel>
         </kendo-grid>
 
-        <kendo-contextmenu
+        <kendo-contextmenu 
+        #employeContextMenu
         [target]="employeegrid"
+        (select)="onContextMenuSelect($event)"
         >
         <kendo-menu-item text="Add Employee"></kendo-menu-item>
         <kendo-menu-item text="Edit Employee"></kendo-menu-item>
         <kendo-menu-item text="Delete Employee"></kendo-menu-item>
     </kendo-contextmenu>
 
-    <kendo-dialog 
-    width="500px"
-    >
+    <kendo-dialog width="500px" (close)="onClose('cancel')" *ngIf="showEmployeeDialog">
         <kendo-dialog-titlebar>
             Add Employee
         </kendo-dialog-titlebar>
@@ -32,140 +32,135 @@
             <div style="display: flex;">
                 <div class="input-group" style="margin-bottom: 10px;">
                     <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                    <input id="roleId" type="number" class="form-control" value=""
+                    <input id="roleId" type="number" class="form-control" name="roleId" 
                            placeholder="{{'roleId_placeholder' | translate}}"
-                           ng-model="roleId">
+                           [(ngModel)]="EmployeeObj.roleId">
                 </div>
                 <div class="input-group" style="margin-bottom: 10px;">
                     <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                    <input id="empDesignationId" type="number" class="form-control" value=""
+                    <input id="empDesignationId" type="number" class="form-control" name="empDesignationId" 
                            placeholder="{{'empDesignationId_placeholder' | translate}}"
-                           ng-model="empDesignationId">
+                           [(ngModel)]="EmployeeObj.empDesignationId">
                 </div>
             </div>
             <div style="display: flex;">
                 <div class="input-group" style="margin-bottom: 10px;">
                     <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                    <input id="username" type="text" class="form-control" value=""
+                    <input id="userName" type="text" class="form-control" name="userName" 
                            placeholder="{{'username_placeholder' | translate}}"
-                           ng-model="username">
+                           [(ngModel)]="EmployeeObj.userName">
                 </div>
             </div>
             <div style="display: flex;">
                 <div class="input-group" style="margin-bottom: 10px;">
                     <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                    <input id="empName" type="text" class="form-control" value=""
+                    <input id="empName" type="text" class="form-control" name="empName" 
                            placeholder="{{'empName_placeholder' | translate}}"
-                           ng-model="empName">
+                           [(ngModel)]="EmployeeObj.empName">
                 </div>
             </div>
 
             <div style="display: flex;">
                 <div class="input-group" style="margin-bottom: 10px;">
                     <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                    <input id="empCode" type="number" class="form-control" value=""
+                    <input id="empCode" type="text" class="form-control" name="empCode" 
                            placeholder="{{'empCode_placeholder' | translate}}"
-                           ng-model="empCode">
+                           [(ngModel)]="EmployeeObj.empCode">
                 </div>
                 <div class="input-group" style="margin-bottom: 10px;">
                     <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                    <input id="empId" type="number" class="form-control" value=""
+                    <input id="empId" type="number" class="form-control" name="empId" 
                            placeholder="{{'empId_placeholder' | translate}}"
-                           ng-model="empId">
+                           [(ngModel)]="EmployeeObj.empId">
                 </div>
             </div>
 
             <div style="display: flex;">
                 <div class="input-group" style="margin-bottom: 10px;">
                     <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                    <input id="empEmailId" type="text" class="form-control" value=""
+                    <input id="empEmailId" type="email" class="form-control" name="empEmailId" 
                            placeholder="{{'empEmailId_placeholder' | translate}}"
-                           ng-model="empEmailId">
+                           [(ngModel)]="EmployeeObj.empEmailId">
                 </div>
                 <div class="input-group" style="margin-bottom: 10px;">
                     <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                    <input id="empPersonalEmailId" type="text" class="form-control" value=""
+                    <input id="empPersonalEmailId" type="email" class="form-control" name="empPersonalEmailId" 
                            placeholder="{{'empPersonalEmailId_placeholder' | translate}}"
-                           ng-model="empPersonalEmailId">
+                           [(ngModel)]="EmployeeObj.empPersonalEmailId">
                 </div>
             </div>
 
             <div style="display: flex;">
                 <div class="input-group" style="margin-bottom: 10px;">
                     <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                    <input id="empContactNo" type="number" class="form-control" value=""
+                    <input id="empContactNo" type="text" class="form-control" name="empContactNo" 
                            placeholder="{{'empContactNo_placeholder' | translate}}"
-                           ng-model="empContactNo">
+                           [(ngModel)]="EmployeeObj.empContactNo">
                 </div>
                 <div class="input-group" style="margin-bottom: 10px;">
                     <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                    <input id="empAltContactNo" type="number" class="form-control" value=""
+                    <input id="empAltContactNo" type="text" class="form-control" name="empAltContactNo" 
                            placeholder="{{'empAltContactNo_placeholder' | translate}}"
-                           ng-model="empAltContactNo">
+                           [(ngModel)]="EmployeeObj.empAltContactNo">
                 </div>
             </div>
 
             <div style="display: flex;">
                 <div class="input-group" style="margin-bottom: 10px;">
                     <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                    <input id="empExpTotalYear" type="number" class="form-control" value=""
+                    <input id="empExpTotalYear" type="number" class="form-control" name="empExpTotalYear" 
                            placeholder="{{'empExpTotalYear_placeholder' | translate}}"
-                           ng-model="empExpTotalYear">
+                           [(ngModel)]="EmployeeObj.empExpTotalYear">
                 </div>
                 <div class="input-group" style="margin-bottom: 10px;">
                     <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                    <input id="empExpTotalMonth" type="number" class="form-control" value=""
+                    <input id="empExpTotalMonth" type="number" class="form-control" name="empExpTotalMonth" 
                            placeholder="{{'empExpTotalMonth_placeholder' | translate}}"
-                           ng-model="empExpTotalMonth">
+                           [(ngModel)]="EmployeeObj.empExpTotalMonth">
                 </div>
             </div>
 
             <div style="display: flex;">
                 <div class="input-group" style="margin-bottom: 10px;">
                     <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                    <input id="empCity" type="text" class="form-control" value=""
+                    <input id="empCity" type="text" class="form-control" name="empCity" 
                            placeholder="{{'empCity_placeholder' | translate}}"
-                           ng-model="empCity">
+                           [(ngModel)]="EmployeeObj.empCity">
                 </div>
                 <div class="input-group" style="margin-bottom: 10px;">
                     <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                    <input id="empState" type="text" class="form-control" value=""
+                    <input id="empState" type="text" class="form-control" name="empState" 
                            placeholder="{{'empState_placeholder' | translate}}"
-                           ng-model="empState">
+                           [(ngModel)]="EmployeeObj.empState">
                 </div>
                 <div class="input-group" style="margin-bottom: 10px;">
                     <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                    <input id="empPinCode" type="number" class="form-control" value=""
+                    <input id="empPinCode" type="text" class="form-control" name="empPinCode" 
                            placeholder="{{'empPinCode_placeholder' | translate}}"
-                           ng-model="empPinCode">
+                           [(ngModel)]="EmployeeObj.empPinCode">
                 </div>
             </div>
 
             <div style="display: flex;">
                 <div class="input-group" style="margin-bottom: 10px;">
                     <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                    <input id="empAddress" type="text" class="form-control" value=""
+                    <input id="empAddress" type="text" class="form-control" name="empAddress" 
                            placeholder="{{'empAddress_placeholder' | translate}}"
-                           ng-model="empAddress">
+                           [(ngModel)]="EmployeeObj.empAddress">
                 </div>
             </div>
 
             <div style="display: flex;">
                 <div class="input-group" style="margin-bottom: 10px;">
                     <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                    <input id="password" type="text" class="form-control" value=""
+                    <input id="password" type="password" class="form-control" name="password" 
                            placeholder="{{'password_placeholder' | translate}}"
-                           ng-model="password">
+                           [(ngModel)]="EmployeeObj.password">
                 </div>
             </div>
 
             <div class="section">
                 <h4>Skills</h4>
-                <div id="skills-container">
-                    <div class="repeatable">
-
-                    </div>
-                </div>
             </div>
 
             <kendo-dropdownlist 
@@ -179,111 +174,103 @@
             name="employeeSelection"
             ></kendo-dropdownlist>
 
-            <p>Selected Option: {{ selectedOption }}</p>
-
-
-            <div *ngIf="selectedOption === 'skills'">
+            <!-- <div *ngIf="selectedOption === 'skills'"> 
+                <br>
                 <div style="display: flex;">
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                        <input id="empSkillId" type="text" class="form-control" value=""
+                        <input id="empSkillId" type="text" class="form-control" name="" 
                                placeholder="{{'empSkillId_placeholder' | translate}}"
-                               ng-model="empSkillId">
+                               [(ngModel)]="EmployeeObj.ErpEmployeeSkills[0].empSkillId">
                     </div>
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                        <input id="empId" type="text" class="form-control" value=""
+                        <input id="empId" type="text" class="form-control" name="" 
                                placeholder="{{'empId_placeholder' | translate}}"
-                               ng-model="empId">
+                               [(ngModel)]="EmployeeObj.empId">
                     </div>
                 </div>
                 <div style="display: flex;">
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                        <input id="skill" type="text" class="form-control" value=""
+                        <input id="skill" type="text" class="form-control" name="" 
                                placeholder="{{'skill_placeholder' | translate}}"
-                               ng-model="skill">
+                               [(ngModel)]="EmployeeObj.ErpEmployeeSkills[0].skill">
                     </div>
                 </div>
                 <div style="display: flex;">
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                        <input id="totalYearExp" type="text" class="form-control" value=""
+                        <input id="totalYearExp" type="text" class="form-control" name="" 
                                placeholder="{{'totalYearExp_placeholder' | translate}}"
-                               ng-model="totalYearExp">
+                               [(ngModel)]="EmployeeObj.ErpEmployeeSkills[0].totalYearExp">
                     </div>
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                        <input id="lastVersionUsed" type="text" class="form-control" value=""
+                        <input id="lastVersionUsed" type="text" class="form-control" name="" 
                                placeholder="{{'lastVersionUsed_placeholder' | translate}}"
-                               ng-model="lastVersionUsed">
+                               [(ngModel)]="EmployeeObj.ErpEmployeeSkills[0].lastVersionUsed">
                     </div>
                 </div>
             </div>
-
-
 
             <div  *ngIf="selectedOption === 'experience'">
+                <br>
                 <div style="display: flex;">
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                        <input id="empExpId" type="text" class="form-control" value=""
+                        <input id="empExpId" type="text" class="form-control" name="" 
                                placeholder="{{'empExpId_placeholder' | translate}}"
-                               ng-model="empExpId">
+                               [(ngModel)]="EmployeeObj.ErmEmpExperiences[0].empExpId">
                     </div>
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                        <input id="empId" type="text" class="form-control" value=""
+                        <input id="empId" type="text" class="form-control" name="" 
                                placeholder="{{'empId_placeholder' | translate}}"
-                               ng-model="empId">
+                               [(ngModel)]="EmployeeObj.empId">
                     </div>
                 </div>
                 <div style="display: flex;">
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                        <input id="companyName" type="text" class="form-control" value=""
+                        <input id="companyName" type="text" class="form-control" name="" 
                                placeholder="{{'companyName_placeholder' | translate}}"
-                               ng-model="companyName">
+                               [(ngModel)]="EmployeeObj.ErmEmpExperiences[0].companyName">
                     </div>
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                        <input id="designation" type="text" class="form-control" value=""
+                        <input id="designation" type="text" class="form-control" name="" 
                                placeholder="{{'designation_placeholder' | translate}}"
-                               ng-model="designation">
+                               [(ngModel)]="EmployeeObj.ErmEmpExperiences[0].designation">
                     </div>
                 </div>
                 <div style="display: flex;">
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                        <input id="projectsWorkedOn" type="text" class="form-control" value=""
+                        <input id="projectsWorkedOn" type="text" class="form-control" name="" 
                                placeholder="{{'projectsWorkedOn_placeholder' | translate}}"
-                               ng-model="projectsWorkedOn">
+                               [(ngModel)]="EmployeeObj.ErmEmpExperiences[0].projectsWorkedOn">
                     </div>
                 </div>
                 <div style="display: flex;">
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                        <input id="startDate" type="text" class="form-control" value=""
+                        <input id="startDate" type="text" class="form-control" name="" 
                                placeholder="{{'startDate_placeholder' | translate}}"
-                               ng-model="startDate">
+                               [(ngModel)]="EmployeeObj.ErmEmpExperiences[0].startDate">
                     </div>
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                        <input id="endDate" type="text" class="form-control" value=""
+                        <input id="endDate" type="text" class="form-control" name="" 
                                placeholder="{{'endDate_placeholder' | translate}}"
-                               ng-model="endDate">
+                               [(ngModel)]="EmployeeObj.ErmEmpExperiences[0].endDate">
                     </div>
                 </div>
-            </div>
-
-
-            
-
-           
-          
+            </div>     -->
         </form>
-
-    
+        <kendo-dialog-actions>
+            <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+        </kendo-dialog-actions>
     </kendo-dialog>
 
     </div>

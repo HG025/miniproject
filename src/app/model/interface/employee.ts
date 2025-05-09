@@ -29,23 +29,23 @@ export class employee {
     empPerPinCode: string;
     empPerAddress: string;
     password: string;
-    ErpEmployeeSkills: {
-        empSkillId: number;
-        empId: number;
-        skill: string;
-        totalYearExp: number;
-        lastVersionUsed: string;
-    }[];
+    // ErpEmployeeSkills: {
+    //     empSkillId: number;
+    //     empId: number;
+    //     skill: string;
+    //     totalYearExp: number;
+    //     lastVersionUsed: string;
+    // }[];
 
-    ErmEmpExperiences: {
-        empExpId: number;
-        empId: number;
-        companyName: string;
-        startDate: Date;
-        endDate: Date;
-        designation: string;
-        projectsWorkedOn: string;
-    }[];
+    // ErmEmpExperiences: {
+    //     empExpId: number;
+    //     empId: number;
+    //     companyName: string;
+    //     startDate: Date;
+    //     endDate: Date;
+    //     designation: string;
+    //     projectsWorkedOn: string;
+    // }[];
 
 
 // initialinzing properties
@@ -71,8 +71,8 @@ export class employee {
         this.empPerPinCode= '';
         this.empPerAddress= '';
         this.password= '';
-        this.ErpEmployeeSkills = [];
-        this.ErmEmpExperiences = [];
+        // this.ErpEmployeeSkills = [];
+        // this.ErmEmpExperiences = [];
     }
 }
 
@@ -89,42 +89,42 @@ export interface IEmployee {
 }
 
 
-export const mockEmployees: employee[] = [
-    (() => {
-        const emp = new employee();
-        emp.roleId = 1;
-        emp.userName = 'john.doe';
-        emp.empCode = 'EMP001';
-        emp.empId = 101;
-        emp.empName = 'John Doe';
-        emp.empEmailId = 'john.doe@example.com';
-        emp.empDesignationId = 2;
-        emp.empContactNo = '1234567890';
-        emp.empCity = 'New York';
-        emp.empState = 'NY';
-        emp.empPinCode = '10001';
-        emp.empAddress = '123 Main St';
-        emp.password = 'securePass123';
-        emp.ErpEmployeeSkills = [
-            {
-                empSkillId: 1,
-                empId: 101,
-                skill: 'Angular',
-                totalYearExp: 3,
-                lastVersionUsed: '15'
-            }
-        ];
-        emp.ErmEmpExperiences = [
-            {
-                empExpId: 1,
-                empId: 101,
-                companyName: 'ABC Corp',
-                startDate: new Date('2020-01-01'),
-                endDate: new Date('2022-12-31'),
-                designation: 'Frontend Developer',
-                projectsWorkedOn: 'Internal Dashboard'
-            }
-        ];
-        return emp;
-    })()
-];
+// export const mockEmployees: employee[] = [
+//     (() => {
+//         const emp = new employee();
+//         emp.roleId = 1;
+//         emp.userName = 'john.doe';
+//         emp.empCode = 'EMP001';
+//         emp.empId = 101;
+//         emp.empName = 'John Doe';
+//         emp.empEmailId = 'john.doe@example.com';
+//         emp.empDesignationId = 2;
+//         emp.empContactNo = '1234567890';
+//         emp.empCity = 'New York';
+//         emp.empState = 'NY';
+//         emp.empPinCode = '10001';
+//         emp.empAddress = '123 Main St';
+//         emp.password = 'securePass123';
+//         emp.ErpEmployeeSkills = [
+//             {
+//                 empSkillId: 1,
+//                 empId: 101,
+//                 skill: 'Angular',
+//                 totalYearExp: 3,
+//                 lastVersionUsed: '15'
+//             }
+//         ];
+//         emp.ErmEmpExperiences = [
+//             {
+//                 empExpId: 1,
+//                 empId: 101,
+//                 companyName: 'ABC Corp',
+//                 startDate: new Date('2020-01-01'),
+//                 endDate: new Date('2022-12-31'),
+//                 designation: 'Frontend Developer',
+//                 projectsWorkedOn: 'Internal Dashboard'
+//             }
+//         ];
+//         return emp;
+//     })()
+// ];

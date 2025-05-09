@@ -40,6 +40,30 @@
     "endDate_placeholder":"End Date",
     "designation_placeholder":"Designation",
     "projectsWorkedOn_placeholder":"Project Worked On",
-    "ErmEmpExperiences_placeholder":"ERM Employee Skills"
+    "ErmEmpExperiences_placeholder":"ERM Employee Skills",
+
+
+    "meetingTitle_placeholder":"Meeting Title",
+    "meetingMedium_placeholder":"Meeting Medium",
+    "projectName_placeholder":"Project Name",
+    "clientPersonNames_placeholder":"Client Name",
+    "leadByEmployeName_placeholder":"Lead By",
+    "projectMeetingId_placeholder":"Meeting ID",
+    "meetingStatus_placeholder":"Meeting Status",
+    "meetingDate_placeholder":"Meeting Date",
+    "clientId_placeholder":"Client ID",
+    "startTime_placeholder":"Start Time",
+    "endTime_placeholder":"End Time",
+    "projectId_placeholder":"Project ID",
+    "meetingLeadByEmpId_placeholder":"Lead ID", 
+    "isRecordingAvailable_placeholder":"Recording Available",
+    "recordingUrl_placeholder":"Recording URL",
+    "meetingNotes_placeholder":"Meeting Notes"
+
    
 }
+
+
+
+
+
