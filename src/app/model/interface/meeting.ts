@@ -13,15 +13,21 @@ export interface IMeeting  {
     clientPersonNames: string
     leadByEmployeName: string
     meetingStatus: string
+
+    meetingLeadByEmpId: number
+    projectId: number 
+    isRecordingAvailable: boolean 
+    recordingUrl: string 
+    meetingNotes: string 
 }
 
 export class meeting {
     projectId: number 
-    meetingLeadByEmpId: string 
+    meetingLeadByEmpId: number 
     meetingDate: string 
     meetingTitle: string 
     meetingMedium: string 
-    projectMeetingId: string 
+    projectMeetingId: number 
     startTime: string 
     endTime:string 
     clientPersonNames: string 
@@ -33,13 +39,13 @@ export class meeting {
     constructor() {
         this.projectId = 0;
         this.isRecordingAvailable = false;
-        this.meetingLeadByEmpId = '';
+        this.meetingLeadByEmpId = 0;
         this.meetingNotes = '';
         this.recordingUrl = '';
         this.meetingDate= '';
         this.meetingTitle= '';
         this.meetingMedium= '';
-        this.projectMeetingId= '';
+        this.projectMeetingId= 0;
         this.startTime= '';
         this.endTime='';
         this.clientPersonNames= '';

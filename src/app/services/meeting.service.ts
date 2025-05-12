@@ -15,7 +15,12 @@ export class MeetingService {
     return this.http.get<APIResponseModel>('/api/api/ClientStrive/GetAllMeetings');
   }
 
-  addMeeting(obj: meeting): Observable<APIResponseModel>{
+  addUpdateMeeting(obj: meeting): Observable<APIResponseModel>{
     return this.http.post<APIResponseModel>('/api/api/ClientStrive/AddUpdateProjectMeeting', obj);
+  }
+
+  deleteMeeting(id: number): Observable<APIResponseModel>{
+    return this.http.delete<APIResponseModel>('/api/api/ClientStrive/DeleteMeetingByMeetingId?meetingId='+id)
+
   }
 }

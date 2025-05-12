@@ -6,9 +6,115 @@
     [kendoGridBinding]="meetingList"
     [pageable]="true"
     [sortable]="true"
-    [pageSize]="5"
+    [pageSize]="30"
     style="height: 90vh;"
+    (remove)="deleteMeeting($event.dataItem.projectMeetingId)"
+    (edit)="editMeeting($event)"
     >
+    <kendo-grid-column
+    field="projectMeetingId"
+    title="projectMeetingId"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+    field="meetingTitle"
+    title="meetingTitle"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+    field="meetingMedium"
+    title="meetingMedium"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+    field="projectName"
+    title="projectName"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+    field="companyName"
+    title="companyName"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+    field="clientId"
+    title="clientId"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+    field="clientPersonNames"
+    title="clientPersonNames"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+    field="leadByEmployeName"
+    title="leadByEmployeName"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+    field="meetingStatus"
+    title="meetingStatus"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+    field="meetingDate"
+    title="meetingDate"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+    field="startTime"
+    title="startTime"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+    field="endTime"
+    title="endTime"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+    field="meetingLeadByEmpId"
+    title="meetingLeadByEmpId"
+    [hidden]="true"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+    field="projectId"
+    title="projectId"
+    [hidden]="true"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+    field="meetingNotes"
+    title="meetingNotes"
+    [hidden]="true"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+    field="recordingUrl"
+    title="recordingUrl"
+    [hidden]="true"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+    field="isRecordingAvailable"
+    title="isRecordingAvailable"
+    [hidden]="true"
+    >
+    </kendo-grid-column>
+    
+    <!-- <kendo-grid-column field="meetingLeadByEmpId" [hidden]="true"></kendo-grid-column>
+<kendo-grid-column field="projectId" [hidden]="true"></kendo-grid-column>
+<kendo-grid-column field="meetingNotes" [hidden]="true"></kendo-grid-column>
+<kendo-grid-column field="recordingUrl" [hidden]="true"></kendo-grid-column> -->
+
+    <kendo-grid-command-column >
+        <ng-template kendoGridCellTemplate>
+            <button kendoGridEditCommand class="btn btn-primary">Edit</button>
+            <button kendoGridRemoveCommand class="btn btn-danger">Delete</button>
+
+        </ng-template>
+
+    </kendo-grid-command-column>
         <ng-template kendoGridToolbarTemplate>
             <div style="width: 90%;">
                 <button class="btn btn-success">Export to Excel</button>
@@ -17,11 +123,6 @@
                     <button class="btn btn-primary" (click)="onCreateMeeting()">Add Meeting</button>
                 </div>
         </ng-template>
-
-        <!-- <kendo-contextmenu
-        #meetingContextMenu
-        ></kendo-contextmenu> -->
-
     </kendo-grid>
 
         <kendo-dialog 
@@ -30,9 +131,17 @@
         *ngIf="createMeetingDialog"
         >
             <kendo-dialog-titlebar>
-                Create Meeting
+                {{ isNew ? "Create Meeting" : "Edit Meeting" }}
             </kendo-dialog-titlebar>
             <form >
+                <div style="display: flex;">
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                        <input id="projectMeetingId" type="text" class="form-control" name="projectMeetingId" disabled
+                               placeholder="{{'projectMeetingId_placeholder' | translate}}"
+                               [(ngModel)]="MeetingObj.projectMeetingId">
+                    </div>
+                </div>
                 <div style="display: flex;">
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
@@ -50,29 +159,15 @@
                 <div style="display: flex;">
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                        <input id="projectMeetingId" type="text" class="form-control" name="projectMeetingId" 
-                               placeholder="{{'projectMeetingId_placeholder' | translate}}"
-                               [(ngModel)]="MeetingObj.projectMeetingId">
-                    </div>
-                    <div class="input-group" style="margin-bottom: 10px;">
-                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
                         <input id="meetingLeadByEmpId" type="text" class="form-control" name="meetingLeadByEmpId" 
                                placeholder="{{'meetingLeadByEmpId_placeholder' | translate}}"
                                [(ngModel)]="MeetingObj.meetingLeadByEmpId">
                     </div>
-                </div>
-                <div style="display: flex;">
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
                         <input id="projectId" type="text" class="form-control" name="projectId" 
                                placeholder="{{'projectId_placeholder' | translate}}"
                                [(ngModel)]="MeetingObj.projectId">
-                    </div>
-                    <div class="input-group" style="margin-bottom: 10px;">
-                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                        <input id="clientPersonNames" type="text" class="form-control" name="clientPersonNames" 
-                               placeholder="{{'clientPersonNames_placeholder' | translate}}"
-                               [(ngModel)]="MeetingObj.clientPersonNames">
                     </div>
                 </div>
                 <div style="display: flex;">
@@ -84,9 +179,9 @@
                     </div>
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-                        <input id="meetingNotes" type="text" class="form-control" name="meetingNotes" 
-                               placeholder="{{'meetingNotes_placeholder' | translate}}"
-                               [(ngModel)]="MeetingObj.meetingNotes">
+                        <input id="clientPersonNames" type="text" class="form-control" name="clientPersonNames" 
+                               placeholder="{{'clientPersonNames_placeholder' | translate}}"
+                               [(ngModel)]="MeetingObj.clientPersonNames">
                     </div>
                 </div>
                 <div style="display: flex;">
@@ -98,12 +193,18 @@
                     </div>
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                        <input id="meetingNotes" type="text" class="form-control" name="meetingNotes" 
+                               placeholder="{{'meetingNotes_placeholder' | translate}}"
+                               [(ngModel)]="MeetingObj.meetingNotes">
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
                         <input id="isRecordingAvailable" type="text" class="form-control" name="isRecordingAvailable" 
                                placeholder="{{'isRecordingAvailable_placeholder' | translate}}"
                                [(ngModel)]="MeetingObj.isRecordingAvailable">
                     </div>
-                </div>
-                <div style="display: flex;">
                     <div class="input-group" style="margin-bottom: 10px;">
                         <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
                         <input id="recordingUrl" type="text" class="form-control" name="recordingUrl" 
