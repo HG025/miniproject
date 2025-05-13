@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIResponseModel } from '../model/interface/role';
-import { meeting } from '../model/interface/meeting';
+import { Meeting } from '../model/class/meeting';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +15,19 @@ export class MeetingService {
     return this.http.get<APIResponseModel>('/api/api/ClientStrive/GetAllMeetings');
   }
 
-  addUpdateMeeting(obj: meeting): Observable<APIResponseModel>{
+  addUpdateMeeting(obj: Meeting): Observable<APIResponseModel>{
     return this.http.post<APIResponseModel>('/api/api/ClientStrive/AddUpdateProjectMeeting', obj);
   }
 
   deleteMeeting(id: number): Observable<APIResponseModel>{
     return this.http.delete<APIResponseModel>('/api/api/ClientStrive/DeleteMeetingByMeetingId?meetingId='+id)
+  }
 
+  getMeetingById(id: number): Observable<APIResponseModel> {
+    return this.http.get<APIResponseModel>(`/api//api/ClientStrive/GetMeetingByMeetingId?meetingid=`+id);
+  }
+
+  getMeetingByProjectId(id: number): Observable<APIResponseModel>{
+    return this.http.get<APIResponseModel>('/api/api/ClientStrive/GetAllMeetingsByProjectId?projectId='+id);
   }
 }
