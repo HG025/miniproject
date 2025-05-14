@@ -11,7 +11,7 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { ContentComponent } from '../content/content.component';
 import { NavigationModule } from '@progress/kendo-angular-navigation';
 import { TranslateModule } from '@ngx-translate/core';
-import { accessibilityIcon, codeIcon, envelopeLinkIcon, homeIcon, menuIcon, searchIcon, userIcon } from '@progress/kendo-svg-icons';
+import { accessibilityIcon, codeIcon, dollarIcon, envelopeLinkIcon, gearIcon, homeIcon, menuIcon, myspaceIcon, searchIcon, userIcon } from '@progress/kendo-svg-icons';
 @Component({
   selector: 'app-dashboard',
   imports: [
@@ -42,7 +42,13 @@ export class DashboardComponent{
     {text: 'meeting', svgIcon: envelopeLinkIcon},
     {separator: true},
     {text: 'project', svgIcon: codeIcon},
-    {separator: true}
+    {separator: true},
+    {text: 'designation', svgIcon: gearIcon},
+    {separator: true},
+    {text: 'client', svgIcon: myspaceIcon},
+    {separator: true},
+    {text: 'payments', svgIcon: dollarIcon},
+    {separator: true},
   ];
 
 public onSelect(ev: DrawerSelectEvent): void {

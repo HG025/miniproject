@@ -1,0 +1,191 @@
+
+
+<div class="col-md-12" #clientGrid>
+    <kendo-grid 
+    [data]="clientList"
+    [kendoGridBinding]="clientList"
+    [sortable]="true"
+    [pageSize]="20"
+    [pageable]="true"
+    style="height: 90vh;"
+    [selectable]="{mode: 'single'}"
+    (selectionChange)="onGridSelectionChange($event)"
+    >
+
+    <ng-template kendoGridToolbarTemplate>
+        <title style="font-weight: bolder; font-size: 20px;">{{'Clients Data'}}</title>
+        <div  style="margin-top: 14px; margin-left: 40vh;">
+            <form #clientFilterForm>
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+                    <input id="clientId" type="number" class="form-control" name="clientId" 
+                           placeholder="{{'clientId_placeholder' | translate}}"
+                           [(ngModel)]="clientObj.clientId">
+                </div>
+            </form>
+            <div style="margin-left: 5vh;">
+                <button
+                kendoButton
+                (click)="getClientById(clientObj.clientId)"
+                class="btn btn-primary">Search</button>
+            </div>
+        </div>
+        <div style="margin-left: 65vh;">
+            <button class="btn btn-success" kendoGridExcelCommand>Export to Excel</button>
+        </div>
+    </ng-template>
+    <kendo-grid-excel fileName="clients.xlsx"></kendo-grid-excel>
+
+    <kendo-grid-column
+    field="clientId"
+    title="clientId"></kendo-grid-column>
+    <kendo-grid-column
+    field="companyName"
+    title="companyName"></kendo-grid-column>
+    <kendo-grid-column
+    field="contactPersonName"
+    title="contactPersonName"></kendo-grid-column>
+    <kendo-grid-column
+    field="contactNo"
+    title="contactNo"></kendo-grid-column>
+    <kendo-grid-column
+    field="employeeStrength"
+    title="employeeStrength"></kendo-grid-column>
+    <kendo-grid-column
+    field="address"
+    title="address"></kendo-grid-column>
+    <kendo-grid-column
+    field="city"
+    title="city"></kendo-grid-column>
+    <kendo-grid-column
+    field="state"
+    title="state"></kendo-grid-column>
+    <kendo-grid-column
+    field="gstNo"
+    title="gstNo"></kendo-grid-column>
+    <kendo-grid-column
+    field="pincode"
+    title="pincode"></kendo-grid-column>
+    <kendo-grid-column
+    field="regNo"
+    title="regNo"></kendo-grid-column>
+</kendo-grid>
+
+<kendo-contextmenu
+#clientContextMenu
+[target]="clientGrid"
+(select)="onContextMenuSelect($event)"
+>
+<kendo-menu-item text="Add Client"></kendo-menu-item>
+<kendo-menu-item text="Edit Client"></kendo-menu-item>
+<kendo-menu-item text="Delete Client"></kendo-menu-item>
+<kendo-menu-item text="Extra"></kendo-menu-item>
+</kendo-contextmenu>
+
+<kendo-dialog width="500px" (close)="onClose()" *ngIf="showClientDialog"
+>
+<kendo-dialog-titlebar>
+   {{isNew ? "Add Client" : "Edit Client"}}
+</kendo-dialog-titlebar>
+<form >
+    <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="clientId" type="number" class="form-control" name="clientId"
+                   placeholder="{{'clientId_placeholder' | translate}}"
+                   [(ngModel)]="clientObj.clientId">
+        </div>
+    </div>
+    <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="contactPersonName" type="text" class="form-control" name="contactPersonName" 
+                   placeholder="{{'contactPersonName_placeholder' | translate}}"
+                   [(ngModel)]="clientObj.contactPersonName">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="regNo" type="text" class="form-control" name="regNo" 
+                   placeholder="{{'regNo_placeholder' | translate}}"
+                   [(ngModel)]="clientObj.regNo">
+        </div>
+    </div>
+    <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="companyName" type="text" class="form-control" name="companyName" 
+                   placeholder="{{'companyName_placeholder' | translate}}"
+                   [(ngModel)]="clientObj.companyName">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="employeeStrength" type="text" class="form-control" name="employeeStrength" 
+                   placeholder="{{'employeeStrength_placeholder' | translate}}"
+                   [(ngModel)]="clientObj.employeeStrength">
+        </div>
+    </div>
+    <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="address" type="text" class="form-control" name="address" 
+                   placeholder="{{'address_placeholder' | translate}}"
+                   [(ngModel)]="clientObj.address">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="contactNo" type="text" class="form-control" name="contactNo" 
+                   placeholder="{{'contactNo_placeholder' | translate}}"
+                   [(ngModel)]="clientObj.contactNo">
+        </div>
+    </div>
+    <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="city" type="text" class="form-control" name="city" 
+                   placeholder="{{'city_placeholder' | translate}}"
+                   [(ngModel)]="clientObj.city">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="state" type="text" class="form-control" name="state" 
+                   placeholder="{{'state_placeholder' | translate}}"
+                   [(ngModel)]="clientObj.state">
+        </div>
+    </div>
+    <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="gstNo" type="text" class="form-control" name="gstNo" 
+                   placeholder="{{'gstNo_placeholder' | translate}}"
+                   [(ngModel)]="clientObj.gstNo">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="pincode" type="text" class="form-control" name="pincode" 
+                   placeholder="{{'pincode_placeholder' | translate}}"
+                   [(ngModel)]="clientObj.pincode">
+        </div>
+    </div>
+</form>
+<kendo-dialog-actions>
+    <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+</kendo-dialog-actions>
+</kendo-dialog>
+
+
+<kendo-dialog width="500px" (close)="onClose()" *ngIf="deleteClientDialog">
+    <kendo-dialog-titlebar>
+        Delete Client!!
+    </kendo-dialog-titlebar>
+    <p>Are You Sure You Want To Delete Client?</p>
+
+    <kendo-dialog-actions>
+        <button click="">No</button>
+        <button class="btn btn-primary" (click)="onDeleteClient(clientObj.clientId)">Yes</button>
+    </kendo-dialog-actions>
+</kendo-dialog>
+
+    
+
+
+</div>

@@ -7,9 +7,12 @@ import { EmployeeComponent } from '../employee/employee.component';
 import { ProjectComponent } from '../project/project.component';
 import { RolesComponent } from '../roles/roles.component';
 import { MeetingComponent } from '../meeting/meeting.component';
+import { ClientComponent } from '../client/client.component';
+import { DesignationComponent } from '../designation/designation.component';
+import { PaymentsComponent } from '../payments/payments.component';
 @Component({
   selector: 'app-content',
-  imports: [CommonModule,CommonModule, EmployeeComponent, RolesComponent, ProjectComponent, MeetingComponent, ChartModule],
+  imports: [CommonModule,CommonModule, EmployeeComponent, RolesComponent, ProjectComponent, MeetingComponent, ChartModule, ClientComponent, DesignationComponent, PaymentsComponent],
   templateUrl: './content.component.html',
   styleUrl: './content.component.css'
 })

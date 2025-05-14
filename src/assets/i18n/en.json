@@ -58,7 +58,20 @@
     "meetingLeadByEmpId_placeholder":"Lead ID", 
     "isRecordingAvailable_placeholder":"Recording Available",
     "recordingUrl_placeholder":"Recording URL",
-    "meetingNotes_placeholder":"Meeting Notes"
+    "meetingNotes_placeholder":"Meeting Notes",
+
+
+    "contactPersonName_placeholder":"Contact Person Name",
+    "address_placeholder":"Address",
+    "city_placeholder":"City",
+    "pincode_placeholder":"Pin Code",
+    "state_placeholder":"State",
+    "employeeStrength_placeholder":"Employee Strength",
+    "gstNo_placeholder":"GST",
+    "contactNo_placeholder":"Contact No",
+    "regNo_placeholder":"Register No"
+
+    
 
    
 }
