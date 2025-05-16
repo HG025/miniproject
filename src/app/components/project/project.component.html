@@ -1,1 +1,647 @@
-<p>project works!</p>
+
+<kendo-tabstrip
+(tabSelect)="onTabSelect($event)"
+>
+<kendo-tabstrip-tab title="Projects" [selected]="true" >
+
+    <ng-template kendoTabContent>
+    <div class="col-md-12" style="padding: 0px;" #projectGrid>
+    <kendo-grid 
+    [data]="projectList"
+    [kendoGridBinding]="projectList"
+    [sortable]="true"
+    [pageable]="true"
+    [pageSize]="20"
+    style="height: 90vh;"
+    
+    >
+    <ng-template kendoGridToolbarTemplate>
+        <title style="font-weight: bolder; font-size: 20px;">{{'Projects'}}</title>
+        <div style="margin-left: 150vh;">
+            <button
+            kendoButton
+            class="btn btn-primary"
+            >Add Project</button>
+        </div>
+    </ng-template>
+    <kendo-grid-column
+    title="Index"
+    field="Index"
+    [width]="80"
+    >
+    <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+        {{rowIndex + 1}}
+    </ng-template>
+
+    </kendo-grid-column>
+    <kendo-grid-column
+    title="empId"
+    field="empId"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="empName"
+    field="empName"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="empCode"
+    field="empCode"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="empEmailId"
+    field="empEmailId"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="empDesignation"
+    field="empDesignation"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="projectName"
+    field="projectName"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="startDate"
+    field="startDate"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="expectedEndDate"
+    field="expectedEndDate"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="clientProjectId"
+    field="clientProjectId"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="clientName"
+    field="clientName"
+    ></kendo-grid-column>
+</kendo-grid>
+
+<kendo-dialog
+*ngIf="filteredDialog"
+[width]="windowWidth"
+[height]="windowHeight"
+(close)="onClose()">
+
+<kendo-dialog-titlebar>
+    {{'Filtered Data'}}
+</kendo-dialog-titlebar>
+
+ <div class="col-md-12" style="padding: 0px;" #FilteredGrid>
+    <div *ngIf="selectedFilter && selectedFilter == 'Filter By Employee ID'">
+    <kendo-grid 
+    [data]="filteredProjectList"
+    [kendoGridBinding]="filteredProjectList"
+    [sortable]="true"
+    [pageable]="true"
+    [pageSize]="20"
+    style="height: 90vh;"
+    >
+    <kendo-grid-column
+    title="Index"
+    field="Index"
+    [width]="80"
+    >
+    <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+        {{rowIndex + 1}}
+    </ng-template>
+
+    </kendo-grid-column>
+    <kendo-grid-column
+    title="empId"
+    field="empId"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="empName"
+    field="empName"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="empCode"
+    field="empCode"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="empEmailId"
+    field="empEmailId"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="empDesignation"
+    field="empDesignation"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="projectName"
+    field="projectName"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="startDate"
+    field="startDate"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="expectedEndDate"
+    field="expectedEndDate"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="clientProjectId"
+    field="clientProjectId"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="clientName"
+    field="clientName"
+    ></kendo-grid-column>
+</kendo-grid>
+</div>
+
+ <div *ngIf="selectedFilter && selectedFilter == 'Filter By Client ID'">
+    <kendo-grid 
+    [data]="filteredProjectList"
+    [kendoGridBinding]="filteredProjectList"
+    [sortable]="true"
+    [pageable]="true"
+    [pageSize]="20"
+    style="height: 90vh;"
+    >
+    <kendo-grid-column
+    title="Index"
+    field="Index"
+    [width]="80"
+    >
+    <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+        {{rowIndex + 1}}
+    </ng-template>
+
+    </kendo-grid-column>
+    <kendo-grid-column
+    title="empId"
+    field="empId"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="empName"
+    field="empName"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="empCode"
+    field="empCode"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="empEmailId"
+    field="empEmailId"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="empDesignation"
+    field="empDesignation"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="projectName"
+    field="projectName"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="startDate"
+    field="startDate"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="expectedEndDate"
+    field="expectedEndDate"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="clientProjectId"
+    field="clientProjectId"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="clientName"
+    field="clientName"
+    ></kendo-grid-column>
+</kendo-grid>
+</div>
+
+<div *ngIf="selectedFilter && selectedFilter == 'Filter By Project ID'">
+    <kendo-grid 
+    [data]="filteredProjectList"
+    [kendoGridBinding]="filteredProjectList"
+    [sortable]="true"
+    [pageable]="true"
+    [pageSize]="20"
+    style="height: 90vh;"
+    >
+    <kendo-grid-column
+    title="Index"
+    field="Index"
+    [width]="80"
+    >
+    <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+        {{rowIndex + 1}}
+    </ng-template>
+
+    </kendo-grid-column>
+    <kendo-grid-column
+    title="clientProjectId"
+    field="clientProjectId"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="projectName"
+    field="projectName"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="startDate"
+    field="startDate"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="expectedEndDate"
+    field="expectedEndDate"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="completedDate"
+    field="completedDate"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="contactPerson"
+    field="contactPerson"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="contactPersonContactNo"
+    field="contactPersonContactNo"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="totalEmpWorking"
+    field="totalEmpWorking"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="projectCost"
+    field="projectCost"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="projectDetails"
+    field="projectDetails"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    title="contactPersonEmailId"
+    field="contactPersonEmailId"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    title="clientId"
+    field="clientId"
+    ></kendo-grid-column>
+</kendo-grid>
+</div>
+
+    </div>
+
+
+</kendo-dialog>
+
+
+
+<kendo-contextmenu
+#projectContextMenu
+[target]="projectGrid"
+(select)="onContextMenuSelect($event)"
+>
+
+<kendo-menu-item text="Edit Project"></kendo-menu-item>
+<kendo-menu-item text="Delete Project"></kendo-menu-item>
+<kendo-menu-item text="Filter Project"></kendo-menu-item>
+</kendo-contextmenu>
+
+<kendo-dialog width="500px" (close)="onClose()" *ngIf="showProjectDialog" >
+<kendo-dialog-titlebar>
+        {{isNew? 'Add Project': 'Edit Project'}}
+    </kendo-dialog-titlebar>
+    <form >
+    <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="empId" type="number" class="form-control" name="empId"
+                   placeholder="{{'empId_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.empId">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="projectName" type="text" class="form-control" name="projectName"
+                   placeholder="{{'projectName_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.projectName">
+        </div>
+    </div>
+     <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="empName" type="text" class="form-control" name="empName" 
+                   placeholder="{{'empName_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.empName">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="empCode" type="text" class="form-control" name="empCode" 
+                   placeholder="{{'empCode_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.empCode">
+        </div>
+    </div>
+     <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="empEmailId" type="text" class="form-control" name="empEmailId" 
+                   placeholder="{{'empEmailId_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.empEmailId">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="empDesignation" type="text" class="form-control" name="empDesignation" 
+                   placeholder="{{'empDesignation_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.empDesignation">
+        </div>
+    </div>
+     <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="clientProjectId" type="number" class="form-control" name="clientProjectId" disabled
+                   placeholder="{{'clientProjectId_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.clientProjectId">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="clientName" type="text" class="form-control" name="clientName" 
+                   placeholder="{{'clientName_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.clientName">
+        </div>
+    </div>
+     <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="startDate" type="date" class="form-control" name="startDate" 
+                   placeholder="{{'startDate_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.startDate">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="expectedEndDate" type="date" class="form-control" name="expectedEndDate" 
+                   placeholder="{{'expectedEndDate_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.expectedEndDate">
+        </div>
+    </div>
+    </form>
+    <kendo-dialog-actions>
+        <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+    </kendo-dialog-actions>
+
+</kendo-dialog>
+<kendo-dialog width="500px" (close)="onClose()" *ngIf="showProjectFilterDialog">
+    <kendo-dialog-titlebar>{{'Filter Projects'}}</kendo-dialog-titlebar>
+    <form >
+        <kendo-label text="Select Filter Option"></kendo-label>
+        <kendo-dropdownlist
+        [data]="filterOptions"
+        name="filter"
+        defaultItem="Select Filter Option..."
+        [(ngModel)]="selectedFilter"
+        [valuePrimitive]="true"
+        ></kendo-dropdownlist>
+
+        <br>
+        <br>        
+
+        <div *ngIf="selectedFilter && selectedFilter == 'Filter By Employee ID'">
+             <kendo-label text="Filter By Employee ID"></kendo-label>
+            <kendo-dropdownlist
+            [data]="projectList"
+            [textField]="'empId'"
+            [valueField]="'empId'"
+            [valuePrimitive]="true"
+            name="EmpIdFilter"
+            [(ngModel)]="selectedEmpId"
+            ></kendo-dropdownlist>
+        </div>
+
+        <div *ngIf="selectedFilter && selectedFilter == 'Filter By Client ID'">
+             <kendo-label text="Filter By Client ID"></kendo-label>
+            <kendo-dropdownlist
+            [data]="projectList"
+            [textField]="'ClientId'"
+            [valueField]="'ClientId'"
+            [valuePrimitive]="true"
+            name="ClientIdFilter"
+            [(ngModel)]="selectedClientId"
+            ></kendo-dropdownlist>
+        </div>
+
+        <div *ngIf="selectedFilter && selectedFilter == 'Filter By Project ID'">
+             <kendo-label text="Filter By Project ID"></kendo-label>
+            <kendo-dropdownlist
+            [data]="projectList"
+            [textField]="'clientProjectId'"
+            [valueField]="'clientProjectId'"
+            [valuePrimitive]="true"
+            name="projectIdFilter"
+            [(ngModel)]="selectedProjectId"
+            ></kendo-dropdownlist>
+        </div>
+    </form>
+
+    <kendo-dialog-actions>
+        <button class="btn btn-primary" (click)="onFilterSubmit()" >Submit</button>
+    </kendo-dialog-actions>
+
+
+    
+
+
+</kendo-dialog>
+    </div>
+    </ng-template>
+
+    
+
+</kendo-tabstrip-tab>
+
+<kendo-tabstrip-tab title="filters" >
+    <ng-template kendoTabContent>    
+
+<div class="col-md-9" style="padding: 0px;">
+    <kendo-grid
+    [data]="projectList"
+    [kendoGridBinding]="projectList"
+    [sortable]="true"
+    [pageable]="true"
+    [pageSize]="20"
+    style="height: 90vh;"
+    
+    >
+    <ng-template kendoGridToolbarTemplate>
+        <title style="font-weight: bolder; font-size: 20px;">{{'Projects'}}</title>
+        <div style="margin-left: 100vh;">
+            <button
+            kendoButton
+            class="btn btn-primary"
+            >Add Project</button>
+        </div>
+    </ng-template>
+    <kendo-grid-column
+    title="Index"
+    field="Index"
+    [width]="80"
+    >
+    <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+        {{rowIndex + 1}}
+    </ng-template>
+
+    </kendo-grid-column>
+    <kendo-grid-column
+    title="empId"
+    field="empId"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="empName"
+    field="empName"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="empCode"
+    field="empCode"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="empEmailId"
+    field="empEmailId"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="empDesignation"
+    field="empDesignation"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="projectName"
+    field="projectName"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="startDate"
+    field="startDate"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="expectedEndDate"
+    field="expectedEndDate"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="clientProjectId"
+    field="clientProjectId"
+    ></kendo-grid-column>
+    <kendo-grid-column
+    title="clientName"
+    field="clientName"
+    ></kendo-grid-column>
+</kendo-grid>
+
+<!-- <kendo-contextmenu
+
+></kendo-contextmenu> -->
+
+<kendo-dialog width="500px" (close)="onClose()" *ngIf="showProjectDialog" >
+<kendo-dialog-titlebar>
+        {{'Add Project'}}
+    </kendo-dialog-titlebar>
+    <form >
+    <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="empId" type="number" class="form-control" name="empId"
+                   placeholder="{{'empId_placeholder' | translate}}" disabled
+                   [(ngModel)]="projectObj.empId">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="projectName" type="text" class="form-control" name="projectName"
+                   placeholder="{{'projectName_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.projectName">
+        </div>
+    </div>
+     <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="empName" type="text" class="form-control" name="empName" 
+                   placeholder="{{'empName_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.empName">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="empCode" type="number" class="form-control" name="empCode" 
+                   placeholder="{{'empCode_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.empCode">
+        </div>
+    </div>
+     <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="empEmailId" type="text" class="form-control" name="empEmailId" 
+                   placeholder="{{'empEmailId_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.empEmailId">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="empDesignation" type="number" class="form-control" name="empDesignation" 
+                   placeholder="{{'empDesignation_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.empDesignation">
+        </div>
+    </div>
+     <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="clientProjectId" type="number" class="form-control" name="clientProjectId" 
+                   placeholder="{{'clientProjectId_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.clientProjectId">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="clientName" type="text" class="form-control" name="clientName" 
+                   placeholder="{{'clientName_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.clientName">
+        </div>
+    </div>
+     <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="startDate" type="date" class="form-control" name="startDate" 
+                   placeholder="{{'startDate_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.startDate">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="expectedEndDate" type="date" class="form-control" name="expectedEndDate" 
+                   placeholder="{{'expectedEndDate_placeholder' | translate}}"
+                   [(ngModel)]="projectObj.expectedEndDate">
+        </div>
+    </div>
+    </form>
+    <kendo-dialog-actions>
+        <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+    </kendo-dialog-actions>
+
+</kendo-dialog>
+</div>
+
+<div class="col-md-3" style="padding: 0px;">
+    <kendo-grid
+    [sortable]="true"
+    [filterable]="true"
+    [pageable]="true"
+    [pageSize]="20"
+    style="height: 45vh;"
+    >
+
+    <ng-template kendoGridToolbarTemplate>
+        <title style="font-weight: bolder; font-size: 20px;">{{'Projects By Employee Id'}}</title>
+    </ng-template>
+
+    </kendo-grid>
+     <kendo-grid
+    [sortable]="true"
+    [filterable]="true"
+    [pageable]="true"
+    [pageSize]="20"
+    style="height: 45vh;"
+    >
+
+    <ng-template kendoGridToolbarTemplate>
+        <title style="font-weight: bolder; font-size: 20px;">{{'Projects By Client Id'}}</title>
+    </ng-template>
+
+    </kendo-grid>
+</div>
+
+
+    </ng-template>
+</kendo-tabstrip-tab>
+</kendo-tabstrip>
+
+
+

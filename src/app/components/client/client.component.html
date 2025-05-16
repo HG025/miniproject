@@ -10,7 +10,11 @@
     style="height: 90vh;"
     [selectable]="{mode: 'single'}"
     (selectionChange)="onGridSelectionChange($event)"
+    (contextmenu)="onClickForContextMenu($event)"
+  
     >
+
+      <!-- (selectionChange)="onGridSelectionChange($event)" -->
 
     <ng-template kendoGridToolbarTemplate>
         <title style="font-weight: bolder; font-size: 20px;">{{'Clients Data'}}</title>
@@ -28,9 +32,14 @@
                 kendoButton
                 (click)="getClientById(clientObj.clientId)"
                 class="btn btn-primary">Search</button>
+                <button 
+                style="margin-left: 5vh;"
+                kendoButton
+                (click)="resetFilter()"
+                class="btn btn-danger">Reset</button>
             </div>
         </div>
-        <div style="margin-left: 65vh;">
+        <div style="margin-left: 40vh;">
             <button class="btn btn-success" kendoGridExcelCommand>Export to Excel</button>
         </div>
     </ng-template>
@@ -79,7 +88,6 @@
 <kendo-menu-item text="Add Client"></kendo-menu-item>
 <kendo-menu-item text="Edit Client"></kendo-menu-item>
 <kendo-menu-item text="Delete Client"></kendo-menu-item>
-<kendo-menu-item text="Extra"></kendo-menu-item>
 </kendo-contextmenu>
 
 <kendo-dialog width="500px" (close)="onClose()" *ngIf="showClientDialog"
@@ -92,7 +100,7 @@
         <div class="input-group" style="margin-bottom: 10px;">
             <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
             <input id="clientId" type="number" class="form-control" name="clientId"
-                   placeholder="{{'clientId_placeholder' | translate}}"
+                   placeholder="{{'clientId_placeholder' | translate}}" disabled
                    [(ngModel)]="clientObj.clientId">
         </div>
     </div>
@@ -105,7 +113,7 @@
         </div>
         <div class="input-group" style="margin-bottom: 10px;">
             <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-            <input id="regNo" type="text" class="form-control" name="regNo" 
+            <input id="regNo" type="number" class="form-control" name="regNo" 
                    placeholder="{{'regNo_placeholder' | translate}}"
                    [(ngModel)]="clientObj.regNo">
         </div>
@@ -119,7 +127,7 @@
         </div>
         <div class="input-group" style="margin-bottom: 10px;">
             <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-            <input id="employeeStrength" type="text" class="form-control" name="employeeStrength" 
+            <input id="employeeStrength" type="number" class="form-control" name="employeeStrength" 
                    placeholder="{{'employeeStrength_placeholder' | translate}}"
                    [(ngModel)]="clientObj.employeeStrength">
         </div>
@@ -133,7 +141,7 @@
         </div>
         <div class="input-group" style="margin-bottom: 10px;">
             <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-            <input id="contactNo" type="text" class="form-control" name="contactNo" 
+            <input id="contactNo" type="number" class="form-control" name="contactNo" 
                    placeholder="{{'contactNo_placeholder' | translate}}"
                    [(ngModel)]="clientObj.contactNo">
         </div>
@@ -155,13 +163,13 @@
     <div style="display: flex;">
         <div class="input-group" style="margin-bottom: 10px;">
             <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-            <input id="gstNo" type="text" class="form-control" name="gstNo" 
+            <input id="gstNo" type="number" class="form-control" name="gstNo" 
                    placeholder="{{'gstNo_placeholder' | translate}}"
                    [(ngModel)]="clientObj.gstNo">
         </div>
         <div class="input-group" style="margin-bottom: 10px;">
             <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
-            <input id="pincode" type="text" class="form-control" name="pincode" 
+            <input id="pincode" type="number" class="form-control" name="pincode" 
                    placeholder="{{'pincode_placeholder' | translate}}"
                    [(ngModel)]="clientObj.pincode">
         </div>
@@ -173,7 +181,7 @@
 </kendo-dialog>
 
 
-<kendo-dialog width="500px" (close)="onClose()" *ngIf="deleteClientDialog">
+<!-- <kendo-dialog width="500px" (close)="onClose()" *ngIf="deleteClientDialog">
     <kendo-dialog-titlebar>
         Delete Client!!
     </kendo-dialog-titlebar>
@@ -183,7 +191,7 @@
         <button click="">No</button>
         <button class="btn btn-primary" (click)="onDeleteClient(clientObj.clientId)">Yes</button>
     </kendo-dialog-actions>
-</kendo-dialog>
+</kendo-dialog> -->
 
     
 

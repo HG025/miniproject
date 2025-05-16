@@ -69,7 +69,14 @@
     "employeeStrength_placeholder":"Employee Strength",
     "gstNo_placeholder":"GST",
     "contactNo_placeholder":"Contact No",
-    "regNo_placeholder":"Register No"
+    "regNo_placeholder":"Register No",
+
+
+
+    "expectedEndDate_placeholder":"Expected End Date",
+    "clientName_placeholder":"Client Name",
+    "clientProjectId_placeholder":"Client Project ID",
+     "empDesignation_placeholder":"Employee Designation"
 
     
 
