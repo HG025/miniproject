@@ -76,8 +76,14 @@
     "expectedEndDate_placeholder":"Expected End Date",
     "clientName_placeholder":"Client Name",
     "clientProjectId_placeholder":"Client Project ID",
-     "empDesignation_placeholder":"Employee Designation"
+    "empDesignation_placeholder":"Employee Designation",
 
+
+    "amount_placeholder":"Amount",
+    "paymentDate_placeholder":"Payment Date",
+    "paymentMode_placeholder":"Payment Mode",
+    "projectPaymentId_placeholder":"Payment ID",
+    "naration_placeholder":"Narration"
     
 
    

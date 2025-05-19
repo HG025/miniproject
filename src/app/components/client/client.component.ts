@@ -141,8 +141,11 @@ export class ClientComponent implements OnInit{
 
 
   onGridSelectionChange(event:any): void {
-    this.selectedClient = event.selectedRow[0].dataItem;
-    console.log(this.selectedClient,"this.selectedClient")
+    if(event.selectedRow && event.selectedRow.length > 0){
+      this.selectedClient = event.selectedRow[0].dataItem;
+    } else {
+      this.selectedClient = null;
+    }
   }
 
   onClickForContextMenu(event: MouseEvent){

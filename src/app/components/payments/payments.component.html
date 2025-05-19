@@ -1,1 +1,233 @@
-<p>payments works!</p>
+
+<div class="col-md-12" #paymentGrid>
+    <kendo-grid
+    [data]="paymentList"
+    [kendoGridBinding]="paymentList"
+    [sortable]="true"
+    [pageable]="true"
+    style="height: 90vh;"
+    [selectable]="{mode: 'single'}"
+    [pageSize]="20"
+    (selectionChange)="onGridSelectionChange($event)"
+    (contextmenu)="onClickForContextMenu($event)"
+    >
+
+    <ng-template kendoGridToolbarTemplate>
+        <title style="font-weight: bolder; font-size: 20px;">{{'Payments'}}</title>
+    </ng-template>
+
+    <kendo-grid-column
+    field="index"
+    title="index"
+    >
+<ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+        {{rowIndex + 1}}
+    </ng-template>
+</kendo-grid-column>
+      <kendo-grid-column
+    field="projectId"
+    title="projectId"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    field="amount"
+    title="amount"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    field="paymentDate"
+    title="paymentDate"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    field="paymentMode"
+    title="paymentMode"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    field="projectPaymentId"
+    title="projectPaymentId"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    field="naration"
+    title="naration"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    field="projectName"
+    title="projectName"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    field="companyName"
+    title="companyName"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    field="clientId"
+    title="clientId"
+    ></kendo-grid-column>
+</kendo-grid>
+
+<kendo-contextmenu
+#paymentContextMenu
+[target]="paymentGrid"
+(select)="onContextMenuSelect($event)"
+>
+<kendo-menu-item text="Add Payment"></kendo-menu-item>
+<kendo-menu-item text="Edit Payment"></kendo-menu-item>
+<kendo-menu-item text="Delete Payment"></kendo-menu-item>
+<kendo-menu-item text="Filter Payment"></kendo-menu-item>
+</kendo-contextmenu>
+
+<kendo-dialog width="500px" *ngIf="showPaymentDialog" (close)="onClose()">
+<kendo-dialog-titlebar>
+    {{isNew? 'Add Payment' : 'update Payment'}}
+</kendo-dialog-titlebar>
+<form >
+    <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="projectPaymentId" type="number" class="form-control" name="projectPaymentId"
+                   placeholder="{{'projectPaymentId_placeholder' | translate}}" disabled
+                   [(ngModel)]="paymentObj.projectPaymentId">
+        </div>
+         <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="projectId" type="number" class="form-control" name="projectId"
+                   placeholder="{{'projectId_placeholder' | translate}}"
+                   [(ngModel)]="paymentObj.projectId">
+        </div>
+    </div>
+     <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="paymentMode" type="text" class="form-control" name="paymentMode" 
+                   placeholder="{{'paymentMode_placeholder' | translate}}"
+                   [(ngModel)]="paymentObj.paymentMode">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="amount" type="number" class="form-control" name="amount" 
+                   placeholder="{{'amount_placeholder' | translate}}"
+                   [(ngModel)]="paymentObj.amount">
+        </div>
+    </div>
+     <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="naration" type="text" class="form-control" name="naration" 
+                   placeholder="{{'naration_placeholder' | translate}}"
+                   [(ngModel)]="paymentObj.naration">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="paymentDate" type="date" class="form-control" name="paymentDate" 
+                   placeholder="{{'paymentDate_placeholder' | translate}}"
+                   [(ngModel)]="paymentObj.paymentDate">
+        </div>
+    </div>
+</form>
+<kendo-dialog-actions>
+    <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+</kendo-dialog-actions>
+</kendo-dialog>
+
+<kendo-dialog
+width="500px" *ngIf="showFilterDialog" (close)="onClose()">
+<kendo-dialog-titlebar>
+    {{'Filter Payments'}}
+</kendo-dialog-titlebar>
+<form >
+    <kendo-label text="Select Filter Type"></kendo-label>
+    <kendo-dropdownlist
+    [data]="filterOptions"
+    name="filter"
+    [(ngModel)]="selectedFilter"
+    [valuePrimitive]="true"
+    ></kendo-dropdownlist>
+
+    <br>
+    <br>
+
+    <div *ngIf="selectedFilter && selectedFilter == 'Filter By Project ID' ">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="projectId" type="number" class="form-control" name="projectId"
+                   placeholder="{{'projectId_placeholder' | translate}}" 
+                   [(ngModel)]="paymentObj.projectId">
+        </div>
+    </div>
+     <div *ngIf="selectedFilter && selectedFilter == 'Filter By Client ID' ">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="clientId" type="number" class="form-control" name="clientId"
+                   placeholder="{{'clientId_placeholder' | translate}}" 
+                   [(ngModel)]="paymentObj.clientId">
+        </div>
+    </div>
+</form>
+<kendo-dialog-actions>
+    <button class="btn btn-primary" (click)="onSubmitFilter()">Submit Filter</button>
+</kendo-dialog-actions>
+</kendo-dialog>
+
+<kendo-dialog
+*ngIf="filteredDialog"
+[height]="windowHeight"
+[width]="windowWidth"
+(close)="onClose()">
+<kendo-dialog-titlebar>
+    {{selectedFilter}}
+</kendo-dialog-titlebar>
+<div class="col-md-12" style="padding: 0px;" #FilteredGrid>
+    <kendo-grid
+    [data]="filteredPaymentList"
+    [kendoGridBinding]="filteredPaymentList"
+    [pageable]="true"
+    [sortable]="true"
+    [pageSize]="20"
+    style="height: 90vh;">
+
+    <kendo-grid-column
+    field="index"
+    title="index"
+    >
+<ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+        {{rowIndex + 1}}
+    </ng-template>
+</kendo-grid-column>
+      <kendo-grid-column
+    field="projectId"
+    title="projectId"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    field="amount"
+    title="amount"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    field="paymentDate"
+    title="paymentDate"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    field="paymentMode"
+    title="paymentMode"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    field="projectPaymentId"
+    title="projectPaymentId"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    field="naration"
+    title="naration"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    field="projectName"
+    title="projectName"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    field="companyName"
+    title="companyName"
+    ></kendo-grid-column>
+     <kendo-grid-column
+    field="clientId"
+    title="clientId"
+    ></kendo-grid-column>
+</kendo-grid>
+</div>
+
+</kendo-dialog>
+</div>
