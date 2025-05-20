@@ -27,9 +27,19 @@ export class ProjectService {
   }
 
 
-
   addupdateProject(): Observable<APIResponseModel>{
     return this.http.get<APIResponseModel>('/api/api/ClientStrive/AddUpdateClientProject');
   }
+
+
+
+// project changes
+
+  getAllProjectChanges(): Observable<APIResponseModel>{
+    return this.http.get<APIResponseModel>('/api/api/ClientStrive/GetAllProjectChange');
+  }
+
+  
+
 
 }

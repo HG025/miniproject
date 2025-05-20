@@ -41,3 +41,15 @@ export interface IProject2 {
     clientId: number
 
 }
+
+
+export interface IProjectChanges {
+    changeDate: string
+    changeDetails: string
+    projectChangeId: number
+    projectName: string
+    companyName: string
+    changeApprovedBy: string
+    projectId: number
+    approvedByEmpId: number
+}

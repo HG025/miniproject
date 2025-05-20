@@ -2,7 +2,7 @@
 <kendo-tabstrip
 (tabSelect)="onTabSelect($event)"
 >
-<kendo-tabstrip-tab title="Projects" [selected]="true" >
+<kendo-tabstrip-tab title="Projects" >
 
     <ng-template kendoTabContent>
     <div class="col-md-12" style="padding: 0px;" #projectGrid>
@@ -448,6 +448,59 @@
 
 </kendo-tabstrip-tab>
 
+
+
+
+
+
+<kendo-tabstrip-tab title="Project Changes" [selected]="true">
+    <ng-template kendoTabContent>
+        <div #projectChangeGrid>
+             <kendo-grid
+        [data]="projectChangeList"
+        [kendoGridBinding]="projectChangeList"
+        [pageable]="true"
+        [pageSize]="20"
+        [sortable]="true"
+        style="height: 90vh;"
+        [selectable]="{mode: 'single'}"
+        >
+            <ng-template kendoGridToolbarTemplate>
+                <title style="font-size: 20px; font-weight: bold;">Project Changes</title>
+            </ng-template>
+        </kendo-grid>
+        <kendo-contextmenu
+        #projectChangeContextMenu
+        [target]="projectChangeGrid">
+            <kendo-menu-item text="Request Change"></kendo-menu-item>
+            <kendo-menu-item text="Edit Change"></kendo-menu-item>
+            <kendo-menu-item text="Delete Change"></kendo-menu-item>
+            <kendo-menu-item text="Filter Change"></kendo-menu-item>            
+        </kendo-contextmenu>
+
+        <kendo-dialog width="500px" (close)="onClose()" *ngIf="showProjectChangeDialog">
+
+        </kendo-dialog>
+
+        </div>
+       
+    </ng-template>
+</kendo-tabstrip-tab>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <kendo-tabstrip-tab title="filters" >
     <ng-template kendoTabContent>    
 
@@ -641,6 +694,8 @@
 
     </ng-template>
 </kendo-tabstrip-tab>
+
+
 </kendo-tabstrip>
 
 

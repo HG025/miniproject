@@ -3,8 +3,8 @@ import { KENDO_GRID } from '@progress/kendo-angular-grid';
 import { KENDO_GRIDLAYOUT, KENDO_TABSTRIP } from '@progress/kendo-angular-layout';
 import { ProjectService } from '../../services/project.service';
 import { APIResponseModel } from '../../model/interface/role';
-import { Project } from '../../model/class/project';
-import { IProject, IProject2 } from '../../model/interface/project';
+import { Project, ProjectChanges } from '../../model/class/project';
+import { IProject, IProject2, IProjectChanges } from '../../model/interface/project';
 import { KENDO_CONTEXTMENU } from '@progress/kendo-angular-menu';
 import { KENDO_DIALOG, KENDO_DIALOGS } from '@progress/kendo-angular-dialog';
 import { TranslateModule } from '@ngx-translate/core';
@@ -118,6 +118,7 @@ export class ProjectComponent implements OnInit{
     this.showProjectDialog = false;
     this.showProjectFilterDialog = false;
     this.filteredDialog = false;
+    this.showProjectChangeDialog = false;
   }
 
   onSubmit(){
@@ -159,8 +160,31 @@ export class ProjectComponent implements OnInit{
 
   ngOnInit(): void {
     this.getAllProject();
+    this.getAllProjectChanges();
+    
     this.onWindowSize();
+
     console.log(this.datVal,"datVal")
+  }
+
+
+
+
+
+  // project changes 
+
+  public projectChangeList: IProjectChanges[] = [];
+
+  public projectChangeObj: ProjectChanges = new ProjectChanges();
+
+  public showProjectChangeDialog: boolean = false;
+
+
+
+  getAllProjectChanges() {
+    this.projectService.getAllProjectChanges().subscribe((res: APIResponseModel)=>{
+      this.projectChangeList = res.data;
+    })
   }
 
 }
