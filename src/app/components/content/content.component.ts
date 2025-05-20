@@ -5,14 +5,12 @@ import { RolesService } from '../../services/roles.service';
 import { SeriesLabelsContentArgs, ChartModule  } from "@progress/kendo-angular-charts";
 import { EmployeeComponent } from '../employee/employee.component';
 import { ProjectComponent } from '../project/project.component';
-import { RolesComponent } from '../roles/roles.component';
 import { MeetingComponent } from '../meeting/meeting.component';
 import { ClientComponent } from '../client/client.component';
-import { DesignationComponent } from '../designation/designation.component';
 import { PaymentsComponent } from '../payments/payments.component';
 @Component({
   selector: 'app-content',
-  imports: [CommonModule,CommonModule, EmployeeComponent, RolesComponent, ProjectComponent, MeetingComponent, ChartModule, ClientComponent, DesignationComponent, PaymentsComponent],
+  imports: [CommonModule,CommonModule, EmployeeComponent, ProjectComponent, MeetingComponent, ChartModule, ClientComponent, PaymentsComponent],
   templateUrl: './content.component.html',
   styleUrl: './content.component.css'
 })

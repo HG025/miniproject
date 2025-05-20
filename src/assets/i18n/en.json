@@ -83,7 +83,13 @@
     "paymentDate_placeholder":"Payment Date",
     "paymentMode_placeholder":"Payment Mode",
     "projectPaymentId_placeholder":"Payment ID",
-    "naration_placeholder":"Narration"
+    "naration_placeholder":"Narration",
+
+
+    "designationId_placeholder":"Designation ID",
+
+
+    "role_placeholder":"Role"
     
 
    

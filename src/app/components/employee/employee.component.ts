@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, Injectable, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ExcelService, KENDO_GRID, KENDO_GRID_EXCEL_EXPORT } from '@progress/kendo-angular-grid';
-import { employee, IEmployee, Item } from '../../model/interface/employee';
+import { EditEvent, ExcelService, KENDO_GRID, KENDO_GRID_EXCEL_EXPORT } from '@progress/kendo-angular-grid';
+import { Designation, employee, IDesignation, IEmployee, IRoles, Item, Roles } from '../../model/interface/employee';
 import { EmployeeService } from '../../services/employee.service';
 import { APIResponseModel } from '../../model/interface/role';
 import { fileExcelIcon, filePdfIcon, SVGIcon } from '@progress/kendo-svg-icons';
@@ -78,9 +78,13 @@ export class EmployeeComponent implements OnInit{
     });
   }
 
-  onClose(status: string): void {
+  onClose() {
     console.log("close click")
     this.showEmployeeDialog = false;
+    this.showDesignationDialog = false
+    this.showRolesDialog = false
+    this.designationObj = new Designation();
+    this.rolesObj = new Roles();
   }
 
   // constructor(private ref : ChangeDetectorRef) {}
@@ -143,7 +147,213 @@ export class EmployeeComponent implements OnInit{
 
   ngOnInit(): void {
     this.getAllEmployees();
+    this.getAllDesignation();
+    this.getAllRoles();
    
   }
+
+
+  // designations
+
+  public designationList : IDesignation[] = [];
+
+  public designationObj: Designation = new Designation();
+
+  public showDesignationDialog : boolean = false;
+
+  public isNew : boolean = true;
+
+  public selectedDesignation : any;
+
+    getAllDesignation() {
+    this.employeeService.getAllDesignation().subscribe((res:APIResponseModel)=>{
+      this.designationList = res.data;
+
+    })
+    }
+
+    onDesignationContextMenuSelect(event: any) {
+      const selectedDesigItem = event.item.text;
+     if(selectedDesigItem == "Edit Designation"){
+         this.isNew = false
+         this.showDesignationDialog = true
+         this.editDesignation();
+      }else if(selectedDesigItem == "Delete Designation"){
+        this.deleteDesignation(event);
+
+      } 
+  }
+
+  onAddDesignationSelect() {
+      this.isNew = true
+      this.showDesignationDialog = true
+  }
+
+    editDesignation(){
+    const designationId = [{
+    designationId: this.selectedDesignation.designationId,
+    designation: this.selectedDesignation.designation
+  }] 
+    this.employeeService.addUpdateDesignation(designationId).subscribe((res:APIResponseModel)=>{
+      res.data = designationId;
+      if(res.result && res.data && res.data.length > 0 ){
+        this.designationObj = res.data[0];
+        console.log(this.designationObj,"this.designationObj")
+      }
+    })
+  }
+
+  onSubmitDesig() {
+    this.employeeService.addUpdateDesignation([this.designationObj]).subscribe((res:APIResponseModel)=>{
+      console.log(res,"res in submit")
+    if(res.result){
+      if(this.isNew){
+        alert("Designation Created Successfully")
+      }else {
+        alert("Designation Updated Successfully")
+      }
+    }else {
+      alert("Designation created/Updated Failed")
+    }
+    this.designationObj = new Designation();
+    this.showDesignationDialog = false;
+    this.getAllDesignation();
+    })
+  }
+
+  deleteDesignation(designationId: number){
+    designationId = this.selectedDesignation.designationId;
+    const isDelete = "ARE YOU SURE YOU WANT TO DELETE??"
+    this.employeeService.deleteDesignation(designationId).subscribe((res: APIResponseModel)=>{
+      if(isDelete){
+        alert("Designation ID: " + designationId + " delted successfully")
+        this.getAllDesignation();
+      }else {
+        alert("Delete failed!");
+      }
+    })
+  }
+
+
+  onDesignationGridSelectionChange(event: any){
+    if(event.selectedRow && event.selectedRow.length > 0){
+      this.selectedDesignation = event.selectedRow[0].dataItem;
+    }else {
+      this.selectedDesignation = null;
+    }
+  }
+
+  onClickForDesignContextMenu(event: MouseEvent){
+    const tragetRow = (event.target as HTMLElement).closest('kendo-grid-list tr')
+    if(tragetRow){
+      const rowIndex = Array.from(tragetRow.parentElement!.children).indexOf(tragetRow);
+      this.selectedDesignation = this.designationList[rowIndex]
+    }
+  }
+
+
+
+
+  //roles
+
+
+  
+  public rolesList : IRoles[] = [];
+  
+  public rolesObj : Roles = new Roles();
+
+  public showRolesDialog: boolean = false;
+
+  public selectedRole: any;
+  
+  getAllRoles(){
+    this.employeeService.getAllRole().subscribe((res: APIResponseModel)=>{
+     this.rolesList = res.data;
+    })
+  }
+
+  onSubmitRoles() {
+    this.employeeService.addUpdateRoles([this.rolesObj]).subscribe((res: APIResponseModel)=>{
+      if(res.result){
+        if(this.isNew){
+          alert("New Role Created Successfully")
+        }else {
+          alert("Role Updated Successfully!")
+        }
+      }else {
+        alert("failed to create/update Role")
+      }
+      this.getAllRoles();
+      this.rolesObj = new Roles();
+      this.showRolesDialog = false;
+    })
+  }
+
+  editRole() {
+    const roleId = [{
+      roleId: this.selectedRole.roleId,
+      role: this.selectedRole.role}];
+    this.employeeService.addUpdateRoles(roleId).subscribe((res: APIResponseModel)=>{
+      res.data = roleId
+      if(res.data){
+        this.rolesObj = res.data[0];
+      }
+    })
+  }
+
+  deleteRole(roleId: number) {
+    roleId = this.selectedRole.roleId
+    const isDelete = "ARE YOU SURE YOU WANT TO DELETE?";
+    this.employeeService.deleteRole(roleId).subscribe((res: APIResponseModel)=>{
+       if(isDelete){
+         alert("Deleted Successfully")
+      }else {
+        alert("Delete Failed")
+      }
+      this.getAllRoles();
+    })
+  }
+
+  onRolesContextMenuSelect(event: any){
+    const selectedRolesItem = event.item.text;
+
+    if(selectedRolesItem == "Add Roles"){
+      this.isNew = true
+      this.showRolesDialog = true
+
+    }else if(selectedRolesItem == "Edit Roles"){
+       this.isNew = false
+       this.showRolesDialog = true
+       this.editRole();
+    }else if(selectedRolesItem == "Delete Roles"){
+      this.deleteRole(event);
+
+    }
+  }
+
+  onRolesGridSelection(event: any){
+    if(event.selectedRow && event.selectedRow.length > 0){
+      this.selectedRole = event.selectedRow[0].dataItem;
+    }else {
+      this.selectedRole = null
+    }
+  }
+
+  onClickForRolesContextMenu(event: MouseEvent){
+    const targetRow = (event.target as HTMLElement).closest('kendo-grid-list tr');
+    if(targetRow){
+      const rowIndex = Array.from(targetRow.parentElement!.children).indexOf(targetRow);
+      this.selectedRole = this.rolesList[rowIndex];
+    }
+
+  }
+  
+
+
+
+
+
+
+
 
 }

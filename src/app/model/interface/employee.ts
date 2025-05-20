@@ -128,3 +128,43 @@ export interface IEmployee {
 //         return emp;
 //     })()
 // ];
+
+
+
+
+
+export interface IDesignation {
+        designationId: number
+        designation: string
+} 
+
+export class Designation {
+
+    designationId: number
+    designation: string
+
+    constructor() {
+        this.designationId = 0
+        this.designation = ''
+    }
+}
+
+
+
+export interface IRoles {
+        roleId: number
+        role: string
+}
+
+export class Roles {
+
+        roleId: number
+        role: string
+
+    constructor() {
+        this.roleId = 0
+        this.role = ''
+    }
+}
+
+
