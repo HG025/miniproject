@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, Injectable, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EditEvent, ExcelService, KENDO_GRID, KENDO_GRID_EXCEL_EXPORT } from '@progress/kendo-angular-grid';
-import { Designation, employee, IDesignation, IEmployee, IRoles, Item, Roles } from '../../model/interface/employee';
+import { Designation, Employee, IDesignation, IEmployee, IRoles, Item, Roles } from '../../model/interface/employee';
 import { EmployeeService } from '../../services/employee.service';
 import { APIResponseModel } from '../../model/interface/role';
 import { fileExcelIcon, filePdfIcon, SVGIcon } from '@progress/kendo-svg-icons';
@@ -28,102 +28,12 @@ import { KENDO_LABELS } from "@progress/kendo-angular-label";
 export class EmployeeComponent implements OnInit{
   public showEmployeeDialog: boolean = false;
 
-  EmployeeObj: employee = new employee();
+  EmployeeObj: Employee = new Employee();
+
+  public selectedEmployee: any;
 
 
-  // onSubmit() {
-  //   console.log('Sending:', this.EmployeeObj);
-  //   this.employeeService.addNewEmployee(this.EmployeeObj).subscribe((res:APIResponseModel)=> {
-  //     if(res.result){
-  //       alert("employee Added Successfully!!")
-  //       this.getAllEmployees();
-  //       this.EmployeeObj = new employee();
-  //       this.showEmployeeDialog = false;
-  //       console.log(res.data,"res.data")
-  //       console.log(res.result,"res.result")
-  //       console.log(res.message,"res.message")
-  //       console.log(this.EmployeeObj,"this.EmployeeObj")
-  //     }else {
-        
-  //       alert(res.message + "employee Not Created");
-  //       console.log(res.data,"res.data fail")
-  //       console.log(res.result,"res.result fail")
-  //       console.log(res.message,"res.message fail")
-  //       this.showEmployeeDialog = false;
-  //     }
-  //   })
-  // }
-
-  onSubmit() {
-    console.log('Sending:', this.EmployeeObj);
-    this.employeeService.addNewEmployee(this.EmployeeObj).subscribe({
-      next: (res: APIResponseModel) => {
-        if (res.result) {
-          alert("Employee Added Successfully!!");
-          this.getAllEmployees();
-          this.EmployeeObj = new employee();
-          this.showEmployeeDialog = false;
-        } else {
-          alert("Error: " + res.message);
-        }
-      },
-      error: (err) => {
-        console.error("Full error:", err);
-        alert(err?.error?.message || "Unexpected error occurred");
-      },
-      // error: (err) => {
-      //   console.error("HTTP error occurred:", err);
-      //   alert("An unexpected error occurred. Please try again.");
-      // }
-    });
-  }
-
-  onClose() {
-    console.log("close click")
-    this.showEmployeeDialog = false;
-    this.showDesignationDialog = false
-    this.showRolesDialog = false
-    this.designationObj = new Designation();
-    this.rolesObj = new Roles();
-  }
-
-  // constructor(private ref : ChangeDetectorRef) {}
-
-  public excelSvg: SVGIcon = fileExcelIcon;
-
-  employeeList: IEmployee[] = [];
-
-  employeeService = inject(EmployeeService);
-
-  employeeData: any[] = [];
-
-  erpdata: employee[] = [];
-  
-  public selectedOption = 'fresher';
-
-
-    dropdownOptions: Array<Item> = [
-    { text: 'fresher', value: 'fresher' },
-    { text: 'ErpEmployeeSkills', value: 'skills' },
-    { text: 'ErmEmpExperiences', value: 'experience' }
-  ];
-
-  
-  onSelectedValueChange(selectedValue: any): void {
-    console.log('New selected value:', selectedValue);
-    this.selectedOption = selectedValue;
-  }
-
-  onContextMenuSelect(event: any): void{
-    const selectedText = event.item.text;
-    if(selectedText === 'Add Employee'){
-      this.showEmployeeDialog = true;
-    }
-
-  }
-
-
-  getAllEmployees() {
+    getAllEmployees() {
     this.employeeService.getAllEmployee().subscribe((res:APIResponseModel)=> {
       this.employeeList = res.data;
       if(this.employeeList && this.employeeList.length){
@@ -144,6 +54,134 @@ export class EmployeeComponent implements OnInit{
       console.log( this.employeeList," this.employeeList")
     })
   }
+
+
+  onSubmit() {
+    if(this.isNew){
+       this.employeeService.addNewEmployee(this.EmployeeObj).subscribe((res: APIResponseModel)=>{
+      console.log(res,"res ")
+      if(res.result){
+        if(this.isNew){ 
+          alert("Employee Created Successfully")
+        }else {
+          alert("Employee Updated Successfully")
+        }
+      }else {
+        alert("Employee create/Updated failed")
+      }
+      this.showEmployeeDialog = false;
+      this.getAllEmployees();
+      this.EmployeeObj = new Employee();
+    })
+    }else {
+      console.log(this.EmployeeObj,"this.EmployeeObj")
+        this.employeeService.updateEmployee(this.EmployeeObj).subscribe((res: APIResponseModel)=>{
+          console.log("working")
+      res.data;
+      console.log(res,"res hkjjhk")
+    })
+    }    
+  }
+
+
+  deleteEmployee(event: any) {
+    const selectedEmployee = this.selectedEmployee.empId;
+    const isDelete = "ARE YOU SURE YOU WANT TO DELETE?"
+    if(isDelete){
+         this.employeeService.deleteEmployee(selectedEmployee).subscribe((res: APIResponseModel)=>{
+          if(res.result){
+            alert("deleted Successfully");
+          }else{
+            alert("delete Failed")
+          }
+          this.getAllEmployees();
+         })
+    }
+  }
+
+  editEmployee(event: EditEvent){
+    const selectedEmployee = this.selectedEmployee.empId;
+    this.employeeService.getEmployeeByEmpId(selectedEmployee).subscribe((res: APIResponseModel)=>{
+      if(res && res.data){
+        const data = res.data;
+        const experiences = (data.ermEmpExperiences || []).map((exp: any)=> ({
+            ...exp,
+          startDate: exp.startDate ? new Date(exp.startDate).toISOString().split('T')[0] : '',
+          endDate: exp.endDate ? new Date(exp.endDate).toISOString().split('T')[0] : '',
+        }))
+      this.EmployeeObj = {
+        ...data,
+        ErpEmployeeSkills: data.erpEmployeeSkills || [],
+        ErmEmpExperiences: experiences,
+      };
+      }
+    })
+  }
+
+
+  onGridSelectionChange(event: any){
+    if(event.selectedRow && event.selectedRow.length > 0){
+      this.selectedEmployee = event.selectedRow[0].dataItem;
+    }else {
+      this.selectedEmployee = null
+    }
+  }
+
+  onClickForContextMenu(event: MouseEvent) {
+    const targetRow = (event.target as HTMLElement).closest('kendo-grid-list tr');
+    if(targetRow){
+      const rowIndex = Array.from(targetRow.parentElement!.children).indexOf(targetRow);
+      this.selectedEmployee = this.employeeList[rowIndex];
+    }
+  }
+
+  onClose() {
+    console.log("close click")
+    this.showEmployeeDialog = false;
+    this.showDesignationDialog = false
+    this.showRolesDialog = false
+    this.designationObj = new Designation();
+    this.rolesObj = new Roles();
+    this.EmployeeObj = new Employee();
+  }
+
+  // constructor(private ref : ChangeDetectorRef) {}
+
+  public excelSvg: SVGIcon = fileExcelIcon;
+
+  employeeList: IEmployee[] = [];
+
+  employeeService = inject(EmployeeService);
+
+  employeeData: any[] = [];
+
+  erpdata: Employee[] = [];
+  
+  public selectedOption = 'fresher';
+
+  
+  onSelectedValueChange(selectedValue: any): void {
+    console.log('New selected value:', selectedValue);
+    this.selectedOption = selectedValue;
+  }
+
+  onContextMenuSelect(event: any): void{
+    const selectedText = event.item.text;
+    if(selectedText === 'Add Employee'){
+      this.isNew = true
+      this.showEmployeeDialog = true;
+    }else if(selectedText === 'Edit Employee'){
+      this.isNew = false
+      this.showEmployeeDialog = true;
+      this.editEmployee(event);
+    }else if(selectedText === 'Delete Employee'){
+      this.deleteEmployee(event);
+    }
+
+  }
+
+
+
 
   ngOnInit(): void {
     this.getAllEmployees();

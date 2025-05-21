@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIResponseModel } from '../model/interface/role';
-import { Designation, employee, Roles } from '../model/interface/employee';
+import { Designation, Employee, Roles } from '../model/interface/employee';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,20 @@ export class EmployeeService {
     return this.http.get<APIResponseModel>('/api/api/ClientStrive/GetAllEmployee');
   }
 
-  addNewEmployee(obj: employee): Observable<APIResponseModel>{
+  addNewEmployee(obj: Employee): Observable<APIResponseModel>{
     return this.http.post<APIResponseModel>('/api/api/ClientStrive/CreateNewEmployee', obj);
+  }
+
+  updateEmployee(obj: Employee): Observable<APIResponseModel> {
+    return this.http.post<APIResponseModel>('/api/api/ClientStrive/UpdateEmployee', obj);
+  }
+
+  getEmployeeByEmpId(empId: number): Observable<APIResponseModel>{
+    return this.http.get<APIResponseModel>('/api/api/ClientStrive/GetEmployeeByEmployeeId?id='+ empId)
+  }
+
+  deleteEmployee(empId: number): Observable<APIResponseModel>{
+    return this.http.delete<APIResponseModel>('/api/api/ClientStrive/DeleteEmployeeByEmpId?empId='+ empId)
   }
 
 
