@@ -89,7 +89,13 @@
     "designationId_placeholder":"Designation ID",
 
 
-    "role_placeholder":"Role"
+    "role_placeholder":"Role",
+
+
+    "projectChangeId_placeholder":"Project Change ID",
+    "changeDetails_placeholder":"Change Details",
+    "changeDate_placeholder":"Change Date",
+    "approvedByEmpId_placeholder":"Approved By Employee ID"
     
 
    

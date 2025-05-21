@@ -26,24 +26,17 @@ export class Project {
 
 
 export class ProjectChanges {
+    changeDate: string
+    changeDetails: string
     projectChangeId: number
     projectId: number
-    changeDetails: string
-    changeDate: string
     approvedByEmpId: number
 
-    // projectName: string
-    // companyName: string
-    // changeApprovedBy: string
-
     constructor() {
-        this.changeDate= '';
-        this.changeDetails= '';
-        this.projectChangeId= 0;
-        // this.projectName= '';
-        // this.companyName= '';
-        // this.changeApprovedBy= '';
-        this.projectId= 0;
-        this.approvedByEmpId= 0;
+        this.changeDate = '';
+        this.changeDetails = '';
+        this.projectChangeId = 0;
+        this.projectId = 0;
+        this.approvedByEmpId = 0;
     }
 }

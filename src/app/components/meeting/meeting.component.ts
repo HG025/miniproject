@@ -39,25 +39,6 @@ export class MeetingComponent implements OnInit{
 
   public isNew: boolean | undefined ;
 
-  // public meetingForm: FormGroup = new FormGroup ({
-  //   meetingDate : new FormControl(),
-  //   meetingTitle: new FormControl(Validators.required),
-  //   meetingMedium: new FormControl(Validators.required),
-  //   projectMeetingId: new FormControl(Validators.required),
-  //   startTime: new FormControl(),
-  //   endTime: new FormControl(),
-  //   projectName: new FormControl(Validators.required),
-  //   companyName: new FormControl(Validators.required),
-  //   clientId: new FormControl(Validators.required),
-  //   clientPersonNames: new FormControl(Validators.required),
-  //   leadByEmployeName: new FormControl(Validators.required),
-  //   projectId: new FormControl(Validators.required),
-  //   meetingLeadByEmpId: new FormControl(Validators.required),
-  //   isRecordingAvailable: new FormControl(Validators.required),
-  //   recordingUrl: new FormControl(Validators.required),
-  //   meetingNotes: new FormControl(Validators.required),
-  // }); 
-
   onClose(status: string): void {
     console.log("close click")
     this.createMeetingDialog = false;

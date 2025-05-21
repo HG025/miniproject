@@ -1,5 +1,5 @@
 import { Component, HostListener, inject, OnInit } from '@angular/core';
-import { KENDO_GRID } from '@progress/kendo-angular-grid';
+import { EditEvent, KENDO_GRID } from '@progress/kendo-angular-grid';
 import { KENDO_GRIDLAYOUT, KENDO_TABSTRIP } from '@progress/kendo-angular-layout';
 import { ProjectService } from '../../services/project.service';
 import { APIResponseModel } from '../../model/interface/role';
@@ -119,6 +119,7 @@ export class ProjectComponent implements OnInit{
     this.showProjectFilterDialog = false;
     this.filteredDialog = false;
     this.showProjectChangeDialog = false;
+    this.showProjectChangeFilterDialog = false;
   }
 
   onSubmit(){
@@ -179,6 +180,10 @@ export class ProjectComponent implements OnInit{
 
   public showProjectChangeDialog: boolean = false;
 
+  public showProjectChangeFilterDialog: boolean = false;
+
+  public selectedProjectChanges : any;
+
 
 
   getAllProjectChanges() {
@@ -186,5 +191,97 @@ export class ProjectComponent implements OnInit{
       this.projectChangeList = res.data;
     })
   }
+
+  onSubmitProjectChanges() {
+    this.projectService.addUpdateProjectChanges(this.projectChangeObj).subscribe((res: APIResponseModel)=>{
+      if(res.result){
+        if(this.isNew){
+          alert("Request Change Succesfull");
+        }else {
+          alert("Update Change Successfull")
+        }
+      }else{
+        alert("Failed to create/update Request")
+      }
+      this.getAllProjectChanges();
+      this.projectChangeObj = new ProjectChanges();
+      this.showProjectChangeDialog = false;
+    })
+  }
+
+  editProjectChanges(event: EditEvent) {
+    const selectedProjectChangesId = this.selectedProjectChanges.projectChangeId;    
+    this.projectService.getProjectByProjChangeId(selectedProjectChangesId).subscribe((res: APIResponseModel)=>{
+      this.projectChangeObj = res.data;
+      if(this.projectChangeObj.changeDate){
+        const date = new Date(this.projectChangeObj.changeDate);
+        this.projectChangeObj.changeDate = date.toISOString().split('T')[0];
+      }
+    })
+  }
+
+  deleteProjectChanges(projectChangeId: number){
+    projectChangeId = this.selectedProjectChanges.projectChangeId;
+    const isDelete= "ARE YOU SURE YOU WANT TO DELETE?";
+    if(isDelete){
+      this.projectService.deleteProjectChange(projectChangeId).subscribe((res:APIResponseModel)=>{
+        if(res.result){
+          alert("Change Deleted Successfully")
+        }else {
+          alert("Delete Failed")
+        }
+       this.getAllProjectChanges();
+    })
+    }
+  }
+
+  onProjectChangesFilter() {
+    this.projectService.getProjectChangeByProjectId(this.projectChangeObj.projectId).subscribe((res: APIResponseModel)=>{
+      this.projectChangeList = res.data;
+      console.log(res,"res")
+    })
+    this.showProjectChangeFilterDialog = false;
+  }
+
+  onResetFilter(){
+    this.getAllProjectChanges();
+  }
+
+  onProjectChangeContextMenuSelect(event: any){
+    const selectedProjectChangeItem = event.item.text
+
+    if(selectedProjectChangeItem == "Request Change"){
+      this.isNew = true;
+      this.showProjectChangeDialog = true
+
+    }else if(selectedProjectChangeItem == "Edit Change"){
+      this.isNew = false;
+      this.showProjectChangeDialog = true
+      this.editProjectChanges(event);
+    }else if(selectedProjectChangeItem == "Delete Change"){
+      this.deleteProjectChanges(event);
+    }else if(selectedProjectChangeItem == "Filter Change"){
+      this.showProjectChangeFilterDialog = true;
+      
+    }
+  }
+
+  onProjectChangesGridSelection(event: any){
+    if(event.selectedRow && event.selectedRow.length > 0){
+      this.selectedProjectChanges = event.selectedRow[0].dataItem
+    }else {
+      this.selectedProjectChanges = null
+    }
+  }
+
+  onClickForProjectChangesContextMenu(event: MouseEvent){
+    const targetRow = (event.target as HTMLElement).closest('kendo-grid-list tr');
+    if(targetRow){
+      const rowIndex = Array.from(targetRow.parentElement!.children).indexOf(targetRow);
+      this.selectedProjectChanges = this.projectChangeList[rowIndex];
+    }
+  }
+
+
 
 }

@@ -464,14 +464,21 @@
         [sortable]="true"
         style="height: 90vh;"
         [selectable]="{mode: 'single'}"
+        (selectionChange)="onProjectChangesGridSelection($event)"
+        (contextmenu)="onClickForProjectChangesContextMenu($event)"
         >
             <ng-template kendoGridToolbarTemplate>
                 <title style="font-size: 20px; font-weight: bold;">Project Changes</title>
+                <div style="padding-left: 143vh;">
+                    <button class="btn btn-danger" (click)="onResetFilter()">Reset Filter</button>
+                </div>
             </ng-template>
         </kendo-grid>
         <kendo-contextmenu
         #projectChangeContextMenu
-        [target]="projectChangeGrid">
+        [target]="projectChangeGrid"
+        (select)="onProjectChangeContextMenuSelect($event)"
+        >
             <kendo-menu-item text="Request Change"></kendo-menu-item>
             <kendo-menu-item text="Edit Change"></kendo-menu-item>
             <kendo-menu-item text="Delete Change"></kendo-menu-item>
@@ -479,9 +486,68 @@
         </kendo-contextmenu>
 
         <kendo-dialog width="500px" (close)="onClose()" *ngIf="showProjectChangeDialog">
-
+            <kendo-dialog-titlebar>
+                {{isNew? 'Request Change' : 'Update Change'}}
+            </kendo-dialog-titlebar>
+            <form >
+                 <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="projectChangeId" type="number" class="form-control" name="projectChangeId"
+                   placeholder="{{'projectChangeId_placeholder' | translate}}" disabled
+                   [(ngModel)]="projectChangeObj.projectChangeId">
+        </div>
+                </div>
+                 <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="projectId" type="number" class="form-control" name="projectId" 
+                   placeholder="{{'projectId_placeholder' | translate}}"
+                   [(ngModel)]="projectChangeObj.projectId">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="changeDetails" type="text" class="form-control" name="changeDetails" 
+                   placeholder="{{'changeDetails_placeholder' | translate}}"
+                   [(ngModel)]="projectChangeObj.changeDetails">
+        </div>
+    </div>
+     <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="changeDate" type="date" class="form-control" name="changeDate" 
+                   placeholder="{{'changeDate_placeholder' | translate}}"
+                   [(ngModel)]="projectChangeObj.changeDate">
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="approvedByEmpId" type="number" class="form-control" name="approvedByEmpId" 
+                   placeholder="{{'approvedByEmpId_placeholder' | translate}}"
+                   [(ngModel)]="projectChangeObj.approvedByEmpId">
+        </div>
+    </div>    
+            </form>
+            <kendo-dialog-actions>
+                <button class="btn btn-primary" (click)="onSubmitProjectChanges()">Submit</button>
+            </kendo-dialog-actions>
         </kendo-dialog>
 
+        <kendo-dialog width="500px" (close)="onClose()" *ngIf="showProjectChangeFilterDialog">
+            <kendo-dialog-titlebar style="font-size: 20px; font-weight: bold;">Filter Project Changes</kendo-dialog-titlebar>
+             <form >
+            <div style="display: flex;">
+        <div class="input-group" style="margin-bottom: 10px;">
+            <span class="input-group-addon" style="width: auto;"><i class="fa fa-user fa-lg" style="color: #337ab7"></i></span>
+            <input id="projectId" type="number" class="form-control" name="projectId"
+                   placeholder="{{'projectId_placeholder' | translate}}" 
+                   [(ngModel)]="projectChangeObj.projectId">
+        </div>
+                </div>
+        </form>
+        <kendo-dialog-actions>
+            <button class="btn btn-primary" (click)="onProjectChangesFilter()">Submit</button>
+        </kendo-dialog-actions>
+        </kendo-dialog>
         </div>
        
     </ng-template>
